@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sen [Surname] — Web Developer &amp; Copywriter</title>
+  <meta name="description" content="Freelance web developer and copywriter in the Philippines. Shopify, GemPages and Wix pages, the copy that sells on them, and the email and SMS that follow up.">
+  <meta property="og:title" content="Sen [Surname] — Web Developer &amp; Copywriter">
+  <meta property="og:description" content="The page and the words on it. One person, done right.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#F3F4F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F3F4F1;
+      --ink: #111418;
+      --body: #3E434A;
+      --muted: #5A5F66;
+      --line: #DCDFD8;
+      --card: #FFFFFF;
+      --chip: #ECEEE8;
+      --accent: #2346D8;
+      --accent-dark: #142B8C;
+      --accent-soft: #E6EBFF;
+      --green: #1E8E4E;
+      --display: 'Bricolage Grotesque', system-ui, sans-serif;
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-dark); }
+    h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.025em; }
+    button { font: inherit; color: inherit; }
+
+    /* ---------- App shell: one screen, no page scroll ---------- */
+    .app {
+      height: 100vh; height: 100dvh;
+      max-width: 980px; margin: 0 auto;
+      display: flex; flex-direction: column;
+      padding: 0 20px;
+    }
+    .view-area { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 0 110px; scrollbar-width: thin; }
+    .view { display: none; flex-direction: column; gap: 20px; animation: fade .25s ease; }
+    .view.is-active { display: flex; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- Profile header ---------- */
+    .profile { display: flex; align-items: center; gap: 14px; }
+    .avatar {
+      width: 56px; height: 56px; border-radius: 50%; flex: none; overflow: hidden;
+      background: var(--ink); color: #fff; display: grid; place-items: center;
+      font-family: var(--display); font-weight: 800; font-size: 22px;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .who { min-width: 0; flex: 1; }
+    .who .name { font-family: var(--display); font-weight: 800; font-size: 19px; line-height: 1.2; }
+    .who .role { color: var(--muted); font-size: 14px; }
+    .status {
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+      background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+      padding: 8px 14px; font-size: 13px; font-weight: 500;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
+
+    /* ---------- Pitch ---------- */
+    .pitch h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 52px); line-height: 1.04; letter-spacing: -0.035em; }
+    .pitch p { margin: 10px 0 0; max-width: 620px; font-size: 16px; color: var(--body); }
+
+    /* ---------- Stats ---------- */
+    .stats {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    }
+    .stat { padding: 16px 12px; text-align: center; }
+    .stat + .stat { border-left: 1px solid var(--line); }
+    .stat strong { display: block; font-family: var(--display); font-size: 22px; letter-spacing: -0.02em; }
+    .stat span { font-size: 12.5px; color: var(--muted); }
+
+    /* ---------- Tools marquee ---------- */
+    .label { margin: 0 0 10px; font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+    .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+    .track { display: flex; gap: 10px; width: max-content; animation: slide 32s linear infinite; }
+    .marquee:hover .track { animation-play-state: paused; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+    .tool {
+      display: flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px;
+      background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+      font-size: 13.5px; font-weight: 500; white-space: nowrap;
+    }
+    .tool i {
+      width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+      font-style: normal; font-size: 12px; font-weight: 600; color: #fff; background: var(--ink);
+    }
+
+    /* ---------- Explore cards ---------- */
+    .explore {
+      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 1fr);
+      gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .explore::-webkit-scrollbar { display: none; }
+    .tile {
+      scroll-snap-align: start; text-decoration: none; color: var(--ink);
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column; text-align: left; cursor: pointer;
+      padding: 0; transition: transform .15s ease, border-color .15s ease;
+    }
+    .tile:hover { transform: translateY(-2px); border-color: #B9BEB5; color: var(--ink); }
+    .thumb { height: 96px; position: relative; overflow: hidden; }
+    .tile-body { padding: 12px 14px 14px; }
+    .tile-body small { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .tile-body strong { display: block; margin-top: 2px; font-family: var(--display); font-size: 16.5px; letter-spacing: -0.015em; }
+    .tile-body span { display: block; margin-top: 2px; font-size: 13px; color: var(--muted); }
+
+    /* Mini illustrations inside thumbnails (pure CSS) */
+    .t-work { background: #E4E7EF; }
+    .t-work b { position: absolute; width: 74px; height: 70px; border-radius: 10px; background: #fff; box-shadow: 0 4px 14px rgba(17,20,24,.12); }
+    .t-work b:nth-child(1) { left: 22px; top: 22px; transform: rotate(-8deg); background: #1B1E23; }
+    .t-work b:nth-child(2) { left: 64px; top: 16px; transform: rotate(3deg); }
+    .t-work b:nth-child(3) { left: 108px; top: 24px; transform: rotate(10deg); background: var(--accent-soft); }
+    .t-services { background: #EAF0E7; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 16px 30px; }
+    .t-services b { border-radius: 8px; background: #fff; }
+    .t-services b:first-child { background: var(--accent); }
+    .t-clients { background: #F0E7E4; display: grid; place-items: center; font-family: var(--display); font-size: 72px; line-height: 1; color: #C9AFA6; }
+    .t-about { background: #1B1E23; display: grid; place-items: center; }
+    .t-about b { width: 56px; height: 56px; border-radius: 50%; background: #3A3F46; box-shadow: 0 0 0 6px #2A2E34; }
+
+    /* ---------- Inner views ---------- */
+    .view-head h2 { font-weight: 800; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.08; }
+    .view-head p { margin: 6px 0 0; color: var(--muted); }
+    .back {
+      align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 40px;
+      background: none; border: 0; padding: 0; cursor: pointer; font-weight: 600; color: var(--muted);
+    }
+    .back:hover { color: var(--ink); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .card .shot { aspect-ratio: 16 / 8; display: grid; place-items: center; text-align: center; padding: 14px; font-size: 13px; color: #4A4F55; }
+    .card .shot img { width: 100%; height: 100%; object-fit: cover; }
+    .card .body { padding: 14px 16px 16px; }
+    .card .client { font-size: 11.5px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+    .card h3 { margin: 4px 0 6px; font-size: 18px; line-height: 1.2; }
+    .card p { margin: 0; font-size: 14px; color: var(--body); }
+    .card .result { margin-top: 8px; font-weight: 600; color: var(--accent); font-size: 13.5px; }
+    .card.dark { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .card.dark .shot { background: #23272D; color: #C3C7CC; }
+    .card.dark .client { color: #AEB3B9; }
+    .card.dark p { color: #C9CDD2; }
+
+    .service { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+    .service .num { font-size: 12.5px; font-weight: 600; color: var(--accent); }
+    .service h3 { margin: 4px 0 6px; font-size: 19px; }
+    .service p { margin: 0; font-size: 14px; color: var(--body); }
+
+    .quote { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+    .quote blockquote { margin: 0 0 14px; font-family: var(--display); font-size: 19px; line-height: 1.3; letter-spacing: -0.01em; }
+    .quote figcaption { font-size: 13.5px; color: var(--muted); }
+
+    .about-card { background: var(--ink); color: #C9CDD2; border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+    .about-card h3 { color: #fff; font-size: 22px; }
+    .about-card p { margin: 0; }
+    .facts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .facts span { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--chip); }
+
+    /* ---------- Bottom tab bar ---------- */
+    .tabbar {
+      position: fixed; left: 50%; transform: translateX(-50%);
+      bottom: calc(14px + env(safe-area-inset-bottom));
+      width: min(560px, calc(100% - 24px));
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--line); border-radius: 26px; padding: 6px;
+      box-shadow: 0 12px 34px rgba(17,20,24,.12); z-index: 10;
+    }
+    .tab {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      min-height: 52px; justify-content: center; border-radius: 20px;
+      background: none; border: 0; cursor: pointer; font-size: 11.5px; font-weight: 500; color: var(--muted);
+    }
+    .tab svg { width: 20px; height: 20px; }
+    .tab:hover { color: var(--ink); }
+    .tab[aria-current="page"] { background: var(--chip); color: var(--ink); }
+    .fab {
+      justify-self: center; width: 54px; height: 54px; border-radius: 50%; border: 0; cursor: pointer;
+      background: var(--accent); color: #fff; display: grid; place-items: center;
+      box-shadow: 0 8px 20px rgba(35,70,216,.35); margin-top: -18px;
+    }
+    .fab:hover { background: var(--accent-dark); }
+    .fab svg { width: 22px; height: 22px; }
+
+    /* ---------- Contact sheet ---------- */
+    .sheet-backdrop { position: fixed; inset: 0; background: rgba(17,20,24,.4); display: none; z-index: 20; }
+    .sheet-backdrop.open { display: block; }
+    .sheet {
+      position: fixed; left: 50%; bottom: 0; transform: translate(-50%, 100%);
+      width: min(560px, 100%); background: var(--card); border-radius: 26px 26px 0 0;
+      padding: 26px 22px calc(26px + env(safe-area-inset-bottom)); z-index: 21;
+      transition: transform .25s ease; display: flex; flex-direction: column; gap: 12px;
+    }
+    .sheet.open { transform: translate(-50%, 0); }
+    .sheet h2 { font-size: 26px; font-weight: 800; }
+    .sheet p { margin: 0 0 6px; color: var(--body); }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px;
+      border-radius: 999px; font-weight: 600; text-decoration: none; padding: 0 22px;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); color: #fff; }
+    .btn-outline { border: 1.5px solid var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: #fff; }
+    .close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--chip); cursor: pointer; display: grid; place-items: center; }
+
+    /* ---------- Responsive ---------- */
+    @media (min-width: 760px) {
+      .explore { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; }
+    }
+    @media (max-width: 640px) {
+      .status { display: none; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .stat strong { font-size: 19px; }
+      .explore { grid-auto-columns: 72%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .track { animation: none; flex-wrap: wrap; width: auto; }
+      .view, .sheet, .tile { animation: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <div class="view-area" id="viewArea">
+
+    <!-- ================= HOME ================= -->
+    <section class="view is-active" id="home" aria-label="Home">
+      <div class="profile">
+        <!-- Swap the "S" for: <img src="images/sen.jpg" alt="Sen"> -->
+        <div class="avatar" aria-hidden="true">S</div>
+        <div class="who">
+          <div class="name">Sen [Surname]</div>
+          <div class="role">Web Developer &amp; Copywriter · Philippines</div>
+        </div>
+        <span class="status"><span class="dot" aria-hidden="true"></span>Booking [Month]</span>
+      </div>
+
+      <div class="pitch">
+        <h1>The page and the words on it.</h1>
+        <p>I build Shopify and Wix pages, write the copy that sells on them, and set up the emails that follow up — for e‑commerce and beauty brands.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>[X] yrs</strong><span>Freelancing</span></div>
+        <div class="stat"><strong>Copy + Code</strong><span>One person</span></div>
+        <div class="stat"><strong>GMT+8</strong><span>[US] hours</span></div>
+      </div>
+
+      <div>
+        <p class="label">Tools I work with</p>
+        <div class="marquee">
+          <div class="track">
+            <span class="tool"><i>Sh</i>Shopify</span>
+            <span class="tool"><i>Gp</i>GemPages</span>
+            <span class="tool"><i>Wx</i>Wix</span>
+            <span class="tool"><i>G</i>Google Workspace</span>
+            <span class="tool"><i>St</i>Stripe</span>
+            <span class="tool"><i>Dr</i>DaVinci Resolve</span>
+            <span class="tool"><i>Ge</i>Gemini</span>
+            <span class="tool"><i>Gh</i>GitHub</span>
+            <span class="tool"><i>Fb</i>Firebase</span>
+            <!-- duplicate set for seamless loop -->
+            <span class="tool" aria-hidden="true"><i>Sh</i>Shopify</span>
+            <span class="tool" aria-hidden="true"><i>Gp</i>GemPages</span>
+            <span class="tool" aria-hidden="true"><i>Wx</i>Wix</span>
+            <span class="tool" aria-hidden="true"><i>G</i>Google Workspace</span>
+            <span class="tool" aria-hidden="true"><i>St</i>Stripe</span>
+            <span class="tool" aria-hidden="true"><i>Dr</i>DaVinci Resolve</span>
+            <span class="tool" aria-hidden="true"><i>Ge</i>Gemini</span>
+            <span class="tool" aria-hidden="true"><i>Gh</i>GitHub</span>
+            <span class="tool" aria-hidden="true"><i>Fb</i>Firebase</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="label">Explore</p>
+        <div class="explore">
+          <a class="tile" href="#work">
+            <div class="thumb t-work" aria-hidden="true"><b></b><b></b><b></b></div>
+            <div class="tile-body"><small>01 Work</small><strong>Real clients, real pages</strong><span>Advertorials, campaigns, redesigns.</span></div>
+          </a>
+          <a class="tile" href="#services">
+            <div class="thumb t-services" aria-hidden="true"><b></b><b></b><b></b><b></b></div>
+            <div class="tile-body"><small>02 Services</small><strong>What I can do for you</strong><span>Pages, copy, email, ops.</span></div>
+          </a>
+          <a class="tile" href="#clients">
+            <div class="thumb t-clients" aria-hidden="true">“</div>
+            <div class="tile-body"><small>03 Clients</small><strong>In their words</strong><span>What working with me is like.</span></div>
+          </a>
+          <a class="tile" href="#about">
+            <div class="thumb t-about" aria-hidden="true"><b></b></div>
+            <div class="tile-body"><small>04 About</small><strong>Hi, I'm Sen</strong><span>Why one person beats three.</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WORK ================= -->
+    <section class="view" id="work" aria-label="Work">
+      <a class="back" href="#home">← Home</a>
+      <div class="view-head"><h2>Real clients. Real pages.</h2><p>Swap each grey box for a screenshot of the finished work.</p></div>
+      <div class="grid-2">
+        <article class="card">
+          <div class="shot" style="background:#E4E7EF">[Screenshot: VZN advertorial]</div>
+          <div class="body">
+            <div class="client">VZN Frames · Sunglasses</div>
+            <h3>An 11‑section advertorial, written and built</h3>
+            <p>Quiet‑luxury copy for the St Barts⁺ Safari Polarised, built in GemPages, plus a brand design system for every page after it.</p>
+            <div class="result">[Result — e.g. conversion rate after launch]</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="shot" style="background:#EFE6E4">[Screenshot: email + SMS on a phone]</div>
+          <div class="body">
+            <div class="client">Absolute Beauty by Laurie · Med‑spa</div>
+            <h3>Email + SMS campaigns that fill the calendar</h3>
+            <p>Launch‑party and promo campaigns: mobile‑first HTML emails and single‑segment texts with one clear action.</p>
+            <div class="result">[Result — e.g. bookings or RSVPs]</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="shot" style="background:#E6ECE6">[Before / after homepage]</div>
+          <div class="body">
+            <div class="client">HerWay Beauty &amp; Spa · Wholesale</div>
+            <h3>A Wix homepage redesign, built to brief</h3>
+            <p>Rebuilt in the spirit of a reference the client loved, inside the Wix editor their team already uses.</p>
+            <div class="result">[Result — e.g. client feedback]</div>
+          </div>
+        </article>
+        <article class="card dark">
+          <div class="shot">[Screens: Palengke List on two phones]</div>
+          <div class="body">
+            <div class="client">Side project · Web app</div>
+            <h3>Palengke List</h3>
+            <p>An installable grocery app: shared list across phones, barcode scanning, and price history to track inflation.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="view" id="services" aria-label="Services">
+      <a class="back" href="#home">← Home</a>
+      <div class="view-head"><h2>Pick one, or hand me the whole launch.</h2><p>Every project starts with a 15‑minute call and a fixed quote.</p></div>
+      <div class="grid-2">
+        <div class="service"><div class="num">01</div><h3>Landing pages &amp; stores</h3><p>Shopify, GemPages and Wix — advertorials, product pages, homepages. Fast on phones, easy for you to edit.</p></div>
+        <div class="service"><div class="num">02</div><h3>Copywriting</h3><p>Page copy, product descriptions, ad copy and video overlays in your brand's voice — US or British English.</p></div>
+        <div class="service"><div class="num">03</div><h3>Email &amp; SMS</h3><p>Campaigns and launch sequences: designed HTML emails and texts that drive one action.</p></div>
+        <div class="service"><div class="num">04</div><h3>Ops &amp; automations</h3><p>Wix automations, clean member and order data, forms and Sheets — the work that keeps a small business running.</p></div>
+      </div>
+    </section>
+
+    <!-- ================= CLIENTS ================= -->
+    <section class="view" id="clients" aria-label="Clients">
+      <a class="back" href="#home">← Home</a>
+      <div class="view-head"><h2>In their words.</h2><p>Short and specific beats long and glowing.</p></div>
+      <div class="grid-2">
+        <figure class="quote"><blockquote>“[Client quote — one or two sentences about the result.]”</blockquote><figcaption>[Name], [Role] · [Company]</figcaption></figure>
+        <figure class="quote"><blockquote>“[Second client quote — ideally a different industry.]”</blockquote><figcaption>[Name], [Role] · [Company]</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="view" id="about" aria-label="About">
+      <a class="back" href="#home">← Home</a>
+      <div class="about-card">
+        <h3>Most pages fail between the writer and the developer.</h3>
+        <p>When the copy and the build come from the same person, nothing gets lost in hand‑off: headlines fit the layout, buttons say what they do, and the page goes live faster.</p>
+        <p>I'm Sen, a freelance web developer and copywriter based in the Philippines. I work on [US / AU / UK] hours and reply within [one business day].</p>
+      </div>
+      <div class="facts">
+        <span>Based in the Philippines</span><span>GMT+8</span><span>Shopify · GemPages · Wix</span><span>Copy in US or UK English</span>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ================= TAB BAR ================= -->
+  <nav class="tabbar" aria-label="Main">
+    <a class="tab" href="#home" data-tab="home" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Home
+    </a>
+    <a class="tab" href="#work" data-tab="work">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Work
+    </a>
+    <button class="fab" type="button" id="openContact" aria-label="Contact Sen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+    </button>
+    <a class="tab" href="#services" data-tab="services">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>Services
+    </a>
+    <a class="tab" href="#about" data-tab="about">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>About
+    </a>
+  </nav>
+
+  <!-- ================= CONTACT SHEET ================= -->
+  <div class="sheet-backdrop" id="backdrop"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" aria-hidden="true">
+    <button class="close" type="button" id="closeContact" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <h2 id="sheetTitle">Have a page that needs to sell?</h2>
+    <p>Tell me what you're launching. You'll get a plan and a quote within [48 hours].</p>
+    <!-- Swap # for your free Calendly or Cal.com link -->
+    <a class="btn btn-primary" href="#">Book a 15‑min call</a>
+    <!-- Swap for: href="mailto:you@example.com" -->
+    <a class="btn btn-outline" href="#">Email [your email]</a>
+  </div>
+
+</div>
+
+<script>
+  // Hash-based views: #home, #work, #services, #clients, #about
+  const views = document.querySelectorAll('.view');
+  const tabs = document.querySelectorAll('.tab');
+  const area = document.getElementById('viewArea');
+
+  function show() {
+    const id = (location.hash || '#home').slice(1);
+    const target = document.getElementById(id);
+    if (!target || !target.classList.contains('view')) return;
+    views.forEach(v => v.classList.toggle('is-active', v === target));
+    tabs.forEach(t => {
+      if (t.dataset.tab === id) t.setAttribute('aria-current', 'page');
+      else t.removeAttribute('aria-current');
+    });
+    area.scrollTop = 0;
+  }
+  window.addEventListener('hashchange', show);
+  show();
+
+  // Contact sheet
+  const sheet = document.getElementById('sheet');
+  const backdrop = document.getElementById('backdrop');
+  const openBtn = document.getElementById('openContact');
+  const closeBtn = document.getElementById('closeContact');
+
+  function setSheet(open) {
+    sheet.classList.toggle('open', open);
+    backdrop.classList.toggle('open', open);
+    sheet.setAttribute('aria-hidden', String(!open));
+    (open ? closeBtn : openBtn).focus();
+  }
+  openBtn.addEventListener('click', () => setSheet(true));
+  closeBtn.addEventListener('click', () => setSheet(false));
+  backdrop.addEventListener('click', () => setSheet(false));
+  sheet.addEventListener('keydown', e => { if (e.key === 'Escape') setSheet(false); });
+</script>
+</body>
+</html>
