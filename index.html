@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sen [Surname] — Web Developer &amp; Copywriter for E‑commerce and Beauty Brands</title>
+  <meta name="description" content="Freelance web developer and copywriter in the Philippines. Shopify, GemPages and Wix pages, the copy that sells on them, and the email and SMS that follow up.">
+  <meta property="og:title" content="Sen [Surname] — Web Developer &amp; Copywriter">
+  <meta property="og:description" content="The page and the words on it. One person, done right.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#F3F4F1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F3F4F1;
+      --ink: #111418;
+      --body: #3E434A;
+      --muted: #5A5F66;
+      --line: #D5D8D2;
+      --card: #FFFFFF;
+      --chip: #EEF0EA;
+      --accent: #2346D8;
+      --accent-dark: #142B8C;
+      --display: 'Bricolage Grotesque', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); }
+    a:hover { color: var(--accent-dark); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    h1, h2, h3 { font-family: var(--display); letter-spacing: -0.03em; margin: 0; }
+    h2 { font-weight: 800; font-size: clamp(34px, 4vw, 52px); line-height: 1.05; }
+    h3 { font-size: 26px; line-height: 1.15; letter-spacing: -0.02em; }
+    .eyebrow {
+      margin: 0 0 10px; font-size: 14px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 14px 26px; border-radius: 999px;
+      font-weight: 600; text-decoration: none; transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); color: #fff; }
+    .btn-outline { border: 1.5px solid var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: #fff; }
+    .btn-dark { background: var(--ink); color: #fff; padding: 10px 20px; min-height: 44px; }
+    .btn-dark:hover { color: #fff; background: #2a2f36; }
+    .btn-white { background: #fff; color: var(--ink); }
+    .btn-white:hover { color: var(--ink); background: #E3E8FF; }
+
+    /* Header */
+    .site-header .wrap {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 16px; padding-top: 24px; padding-bottom: 24px;
+    }
+    .logo {
+      font-family: var(--display); font-weight: 800; font-size: 22px;
+      color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+    }
+    .logo:hover { color: var(--ink); }
+    .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 15px; font-weight: 500; }
+    .nav a:not(.btn) { color: var(--ink); text-decoration: none; }
+    .nav a:not(.btn):hover { color: var(--accent); }
+
+    /* Hero */
+    .hero .wrap {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 56px;
+      padding-top: 72px; padding-bottom: 72px;
+    }
+    .hero-copy { flex: 999 1 560px; min-width: 0; }
+    .hero h1 { font-weight: 800; font-size: clamp(44px, 6vw, 84px); line-height: 1.02; letter-spacing: -0.035em; }
+    .hero .lede { margin: 28px 0 0; max-width: 600px; font-size: 20px; line-height: 1.55; color: var(--body); }
+    .hero .actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+    .hero-photo { flex: 1 1 320px; min-width: 0; max-width: 420px; }
+    .photo {
+      aspect-ratio: 4 / 5; border-radius: 28px; background: #DDE1DA; overflow: hidden;
+      border: 1.5px dashed #8A9088; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 24px; color: #4A4F55; font-size: 15px;
+    }
+    .badge {
+      position: relative; margin: -36px 24px 0; background: #fff; border-radius: 18px;
+      padding: 16px 20px; box-shadow: 0 10px 30px rgba(17,20,24,0.10);
+      display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 500;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #1E8E4E; flex: none; }
+
+    /* Platforms strip */
+    .platforms { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .platforms .wrap {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 12px 36px;
+      padding-top: 22px; padding-bottom: 22px; font-size: 15px; color: var(--body);
+    }
+    .platforms strong { color: var(--ink); font-weight: 600; }
+
+    /* Sections */
+    section.block { padding: 96px 0 40px; }
+    .section-head {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end;
+      gap: 16px; margin-bottom: 40px;
+    }
+    .section-head a { font-weight: 600; text-decoration: none; }
+
+    /* Work cards */
+    .grid-2 { display: flex; flex-wrap: wrap; gap: 24px; }
+    .card {
+      flex: 1 1 480px; min-width: 0; background: var(--card); border-radius: 24px;
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .card .shot {
+      aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 24px; color: #4A4F55; font-size: 15px;
+    }
+    .card .shot img { width: 100%; height: 100%; object-fit: cover; }
+    .card .body { padding: 28px; }
+    .card .client {
+      margin: 0 0 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .card h3 { margin-bottom: 10px; }
+    .card p.desc { margin: 0 0 18px; color: var(--body); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .chips span { font-size: 13px; padding: 6px 12px; border-radius: 999px; background: var(--chip); }
+    .result { margin: 0; font-weight: 600; color: var(--accent); }
+    .card.dark { background: var(--ink); color: var(--bg); }
+    .card.dark .shot { background: #23272D; color: #C3C7CC; }
+    .card.dark .client { color: #AEB3B9; }
+    .card.dark p.desc { color: #C9CDD2; }
+    .card.dark .chips span { background: #2C3137; }
+
+    /* Services */
+    .services { display: flex; flex-wrap: wrap; gap: 20px; }
+    .service { flex: 1 1 250px; min-width: 0; border-top: 2px solid var(--ink); padding-top: 22px; }
+    .service .num { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+    .service h3 { font-size: 24px; margin-bottom: 10px; }
+    .service p { margin: 0; color: var(--body); }
+
+    /* About band */
+    .about { background: var(--ink); color: var(--bg); margin-top: 56px; }
+    .about .wrap { display: flex; flex-wrap: wrap; gap: 48px; padding-top: 88px; padding-bottom: 88px; }
+    .about .eyebrow { color: #9DB0FF; }
+    .about h2 { font-size: clamp(32px, 3.6vw, 48px); line-height: 1.06; }
+    .about-copy { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px; font-size: 18px; color: #C9CDD2; }
+    .about-copy p { margin: 0; }
+    .about-copy a { color: #fff; font-weight: 600; }
+
+    /* Testimonials */
+    figure.quote { flex: 1 1 340px; min-width: 0; margin: 0; background: var(--card); border-radius: 24px; padding: 32px; }
+    figure.quote blockquote { margin: 0 0 24px; font-family: var(--display); font-size: 24px; line-height: 1.3; letter-spacing: -0.01em; }
+    figure.quote figcaption { font-size: 15px; color: var(--muted); }
+
+    /* CTA */
+    .cta {
+      background: var(--accent); color: #fff; border-radius: 32px; padding: clamp(36px, 6vw, 72px);
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px;
+    }
+    .cta-copy { flex: 999 1 480px; min-width: 0; }
+    .cta h2 { font-size: clamp(34px, 4.4vw, 58px); line-height: 1.02; margin-bottom: 14px; }
+    .cta p { margin: 0; font-size: 19px; color: #E3E8FF; }
+    .cta-actions { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+    .cta-actions .link { color: #fff; text-align: center; min-height: 44px; display: inline-flex; justify-content: center; align-items: center; }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--line); margin-top: 96px; }
+    .site-footer .wrap {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;
+      padding-top: 28px; padding-bottom: 28px; font-size: 14px; color: var(--muted);
+    }
+    .site-footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
+
+    @media (max-width: 640px) {
+      .nav { gap: 18px; }
+      .hero .wrap { padding-top: 40px; gap: 40px; }
+      section.block { padding-top: 64px; }
+      .card { flex-basis: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="logo" href="#top">Sen [Surname]</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a class="btn btn-dark" href="#contact">Book a call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">Web developer + copywriter · Philippines · GMT+8</p>
+          <h1>The page and the words on it. One person, done right.</h1>
+          <p class="lede">I build Shopify and Wix pages, write the copy that sells on them, and set up the emails that follow up — for e‑commerce and beauty brands that want it handled without three freelancers.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Book a 15‑min call
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-outline" href="#work">See the work</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <!-- Replace this div with: <div class="photo"><img src="images/sen.jpg" alt="Sen, smiling, at a desk"></div> -->
+          <div class="photo">[Your photo — natural light, plain background, shoulders up]</div>
+          <div class="badge"><span class="dot" aria-hidden="true"></span>Taking 2 new projects for [Month]</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="platforms" aria-label="Platforms">
+      <div class="wrap">
+        <strong>I work in</strong>
+        <span>Shopify</span><span>GemPages</span><span>Wix</span><span>Google Workspace</span><span>Stripe</span><span>DaVinci Resolve</span><span>Gemini</span>
+      </div>
+    </section>
+
+    <section id="work" class="block">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Selected work</p>
+            <h2>Real clients. Real pages.</h2>
+          </div>
+          <a href="#work">All projects →</a>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <div class="shot" style="background:#E4E7EF">[Screenshot: VZN advertorial — hero + 2 sections, in a browser frame]</div>
+            <div class="body">
+              <p class="client">VZN Frames · Polarised sunglasses</p>
+              <h3>An 11‑section advertorial, written and built</h3>
+              <p class="desc">Quiet‑luxury copy in British English for the St Barts⁺ Safari Polarised, built section by section in GemPages — plus a brand design system so every page after it stays consistent.</p>
+              <div class="chips"><span>Copywriting</span><span>Shopify · GemPages</span><span>Design system</span></div>
+              <p class="result">[Result — e.g. conversion rate, add‑to‑carts, or ROAS after launch]</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="shot" style="background:#EFE6E4">[Screenshot: campaign email on a phone + SMS bubble beside it]</div>
+            <div class="body">
+              <p class="client">Absolute Beauty by Laurie · Medical aesthetics</p>
+              <h3>Email + SMS campaigns that fill the calendar</h3>
+              <p class="desc">Launch‑party and promo campaigns for a med‑spa: mobile‑first HTML emails and single‑segment SMS that end in one clear action — call to book.</p>
+              <div class="chips"><span>Email design</span><span>SMS copy</span><span>Promo strategy</span></div>
+              <p class="result">[Result — e.g. bookings or RSVPs from the campaign]</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="shot" style="background:#E6ECE6">[Before / after: old homepage vs. redesign]</div>
+            <div class="body">
+              <p class="client">HerWay Beauty &amp; Spa Wholesale · B2B beauty</p>
+              <h3>A Wix homepage redesign, built to brief</h3>
+              <p class="desc">The client loved a reference site. I rebuilt their homepage in that spirit — not a copy — inside the Wix editor they already run, so their team can keep editing it.</p>
+              <div class="chips"><span>Wix</span><span>Web design</span><span>Redesign</span></div>
+              <p class="result">[Result — e.g. what the client said, or a metric after launch]</p>
+            </div>
+          </article>
+
+          <article class="card dark">
+            <div class="shot">[Screens: Palengke List on two phones]</div>
+            <div class="body">
+              <p class="client">Side project · Web app</p>
+              <h3>Palengke List, a grocery app I built for my own household</h3>
+              <p class="desc">An installable Android web app: one shared list across phones, saved items that autofill, barcode scanning, and price history to track inflation stall by stall.</p>
+              <div class="chips"><span>Web app</span><span>Firebase</span><span>GitHub Pages</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="block">
+      <div class="wrap">
+        <p class="eyebrow">What I do</p>
+        <h2 style="max-width:760px;margin-bottom:40px">Pick one, or hand me the whole launch.</h2>
+        <div class="services">
+          <div class="service">
+            <p class="num">01</p>
+            <h3>Landing pages &amp; stores</h3>
+            <p>Shopify, GemPages and Wix builds — advertorials, product pages, homepages. Fast on phones, easy for you to edit.</p>
+          </div>
+          <div class="service">
+            <p class="num">02</p>
+            <h3>Copywriting</h3>
+            <p>Page copy, product descriptions, ad copy and video overlays — written in your brand's voice, US or British English.</p>
+          </div>
+          <div class="service">
+            <p class="num">03</p>
+            <h3>Email &amp; SMS</h3>
+            <p>Campaigns and launch sequences: designed HTML emails and texts that fit one segment and drive one action.</p>
+          </div>
+          <div class="service">
+            <p class="num">04</p>
+            <h3>Ops &amp; automations</h3>
+            <p>Wix automations, clean member and order data, forms and Sheets — the behind‑the‑scenes work that keeps a small business running.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="wrap">
+        <div style="flex:1 1 340px;min-width:0">
+          <p class="eyebrow">Why one person</p>
+          <h2>Most pages fail between the writer and the developer.</h2>
+        </div>
+        <div class="about-copy">
+          <p>When the copy and the build come from the same person, nothing gets lost in hand‑off: headlines fit the layout, buttons say what they do, and the page goes live faster.</p>
+          <p>I'm Sen, a freelance web developer and copywriter based in the Philippines. I work with brands on [US / AU / UK] hours and reply within [one business day].</p>
+          <a href="#contact">More about me →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-label="Testimonials">
+      <div class="wrap">
+        <p class="eyebrow">Clients</p>
+        <h2 style="margin-bottom:36px">In their words.</h2>
+        <div class="grid-2">
+          <figure class="quote">
+            <blockquote>“[Client quote — one or two sentences about the result, not about you being nice.]”</blockquote>
+            <figcaption>[Name], [Role] · [Company]</figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“[Second client quote — ideally from a different industry.]”</blockquote>
+            <figcaption>[Name], [Role] · [Company]</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="block">
+      <div class="wrap">
+        <div class="cta">
+          <div class="cta-copy">
+            <h2>Have a page that needs to sell?</h2>
+            <p>Tell me what you're launching. You'll get a plan and a quote within [48 hours].</p>
+          </div>
+          <div class="cta-actions">
+            <!-- Swap # for your free Calendly or Cal.com link -->
+            <a class="btn btn-white" href="#">Book a 15‑min call</a>
+            <!-- Swap for: href="mailto:you@example.com" -->
+            <a class="link" href="#">or email [your email]</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Sen [Surname] · Philippines</span>
+      <nav aria-label="Elsewhere">
+        <a href="#">LinkedIn</a>
+        <a href="#">Upwork</a>
+        <a href="#contact">Email</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
