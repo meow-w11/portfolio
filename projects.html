@@ -413,6 +413,7 @@
     .m-site { align-items: center; gap: 22px; padding: 28px 30px; }
     .pcard.wide .m-site { min-height: 330px; }
     .site-desk { flex: 1 1 0; min-width: 0; align-self: stretch; display: flex; flex-direction: column; border-radius: 10px; box-shadow: 0 10px 26px rgba(11,27,63,.12); }
+    .m-site .site-desk:only-child { max-width: 760px; }
     .site-desk .bar { height: 26px; flex: none; background: #fff; border: 1px solid var(--line); border-bottom: 0; border-radius: 10px 10px 0 0; display: flex; align-items: center; gap: 5px; padding: 0 10px; }
     .site-desk .bar i { width: 7px; height: 7px; border-radius: 50%; background: #D5D8DE; }
     .site-desk .bar .url { margin-left: 10px; font-size: 10.5px; color: #5F6676; background: #F2F3F6; border-radius: 6px; padding: 2px 10px; }
@@ -781,11 +782,10 @@
         <div class="media m-site">
           <div class="site-desk">
             <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="url">herwaybeauty.com</span></div>
-            <div class="scrollshot empty">[Full‑page desktop screenshot]</div>
+            <div class="scrollshot" style="background-image: url(images/herway-desktop.jpg)" role="img" aria-label="Full-page screenshot of the HerWay Beauty homepage"></div>
           </div>
-          <div class="site-phone">
-            <div class="scrollshot empty">[Full‑page phone screenshot]</div>
-          </div>
+          <!-- Phone frame (add back when you have a phone screenshot in images/herway-mobile.jpg):
+          <div class="site-phone"><div class="scrollshot" style="background-image: url(images/herway-mobile.jpg)"></div></div> -->
         </div>
         <div class="pbody">
           <div class="pmeta"><span class="cat">Websites</span><span>HerWay Beauty &amp; Spa</span><span class="badge-wip">Revamp in progress</span></div>
