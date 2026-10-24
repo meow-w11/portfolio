@@ -580,15 +580,16 @@
       .pcard.wide .pbody { padding: 18px; }
       .m-reel .phone:nth-child(n+3) { display: none; }
       .ugc-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px; }
-      /* Phones: accordion becomes a swipeable row in colour */
-      .pcard.wide .m-acc { height: 300px; flex: none; }
-      .acc { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-      .acc::-webkit-scrollbar { display: none; }
-      .acc-i, .acc-i.is-open { flex: 0 0 auto; aspect-ratio: 9 / 16; height: 100%; filter: none; scroll-snap-align: start; }
-      .acc-i::after { opacity: 1; }
-      .acc-cap { opacity: 1; transform: none; font-size: 12.5px; }
-      .acc-wrap { padding: 14px; }
-      .acc-wrap .acc { height: 400px; }
+      /* Phones: still an accordion — 5 strips per row, tap (or auto-cycle on cards) to open */
+      .pcard.wide .m-acc { height: 300px; flex: none; padding: 14px; }
+      .m-acc .acc-i:nth-child(n+6) { display: none; }
+      .acc { gap: 5px; }
+      .acc-i { border-radius: 10px; }
+      .m-acc .acc, .m-acc.sq .acc { --open: 58%; }
+      .acc-wrap { padding: 12px; gap: 8px; }
+      .acc-wrap .acc { height: min(400px, 58vh); --open: 60%; }
+      .acc-wrap.sq .acc { height: min(300px, 44vh); --open: 66%; }
+      .acc-cap { left: 10px; right: 10px; bottom: 10px; font-size: 12px; padding-left: 8px; }
       .pcard.wide .m-reel { height: 260px; flex: none; }
       .pcard.wide .m-board { height: 240px; flex: none; }
       .pcard.wide .m-fan { height: 230px; flex: none; }
@@ -1603,6 +1604,21 @@
   document.addEventListener('pointerover', e => { const el = e.target.closest && e.target.closest('.acc-i'); if (el && e.pointerType === 'mouse') openStrip(el); });
   document.addEventListener('focusin', e => { const el = e.target.closest && e.target.closest('.acc-i'); if (el) openStrip(el); });
   document.addEventListener('click', e => { const el = e.target.closest && e.target.closest('.pd-media .acc-i'); if (el) openStrip(el); });
+  // Cards: gently cycle the open strip when nobody is hovering (phones have no hover)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const cardRows = [...document.querySelectorAll('.m-acc .acc')];
+    const seen = new Set();
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)), { threshold: 0.4 });
+      cardRows.forEach(r => io.observe(r));
+    }
+    setInterval(() => cardRows.forEach(row => {
+      if (!seen.has(row) || row.matches(':hover')) return;
+      const strips = [...row.querySelectorAll('.acc-i')].filter(x => x.offsetWidth > 0);
+      const i = strips.findIndex(x => x.classList.contains('is-open'));
+      openStrip(strips[(i + 1) % strips.length]);
+    }), 2600);
+  }
 
   // ----- Project detail popup
   const dlg = document.getElementById('pdialog');
@@ -1618,7 +1634,17 @@
     const gal = document.getElementById('pdText').querySelector('.ugc-gallery, .img-gallery, .acc-wrap, .dg-wrap');
     if (gal) pdMedia.replaceChildren(gal);
     dlg.classList.toggle('wide', !!(gal && (gal.classList.contains('acc-wrap') || gal.classList.contains('dg-wrap'))));
-    pdMedia.querySelectorAll('.acc').forEach(initAcc);
+    if (gal && matchMedia('(max-width: 860px)').matches) {
+      gal.querySelectorAll('.acc').forEach(row => {
+        const items = [...row.children]; let after = row;
+        for (let i = 5; i < items.length; i += 5) {
+          const r = document.createElement('div'); r.className = 'acc';
+          items.slice(i, i + 5).forEach(x => r.appendChild(x));
+          after.after(r); after = r;
+        }
+      });
+    }
+    pdMedia.querySelectorAll('.acc').forEach(row => { row.querySelectorAll('.is-open').forEach(x => x.classList.remove('is-open')); initAcc(row); });
     lastOpener = opener;
     dlg.showModal();
     dlg.scrollTop = 0;
