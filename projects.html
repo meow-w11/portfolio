@@ -379,6 +379,46 @@
     .pd-text .res { font-weight: 700; color: var(--ink); background: var(--accent-soft); border-radius: 12px; padding: 10px 14px; }
     .pd-close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #0B1B3F; cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow); }
 
+    /* Locked (private) cards: the blur is a generated pattern, never real client media */
+    .m-locked { background: linear-gradient(180deg, #E4E8F2, #EEF0F5); }
+    .blurred { position: relative; overflow: hidden; padding: 0; }
+    .blurred::before {
+      content: ""; position: absolute; inset: -35%; filter: blur(16px) hue-rotate(var(--h, 0deg));
+      background:
+        radial-gradient(circle at 42% 30%, #F1C6A6 0 12%, transparent 30%),
+        radial-gradient(circle at 58% 62%, #5B7BD6 0 16%, transparent 38%),
+        radial-gradient(circle at 30% 78%, #22304D 0 20%, transparent 44%),
+        radial-gradient(circle at 75% 22%, #C9B07A 0 10%, transparent 28%),
+        linear-gradient(160deg, #3B4867, #151A24);
+    }
+    .still.blurred::before, .screen.blurred::before {
+      background:
+        radial-gradient(circle at 35% 35%, #E9C9B0 0 14%, transparent 34%),
+        radial-gradient(circle at 65% 55%, #7E96D8 0 18%, transparent 40%),
+        radial-gradient(circle at 50% 85%, #3B4867 0 22%, transparent 46%),
+        linear-gradient(160deg, #B8C3DA, #6F7B95);
+    }
+    .lock-chip {
+      position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+      background: rgba(11,27,63,.86); color: #fff; padding: 9px 15px; border-radius: 999px;
+      font-size: 12.5px; font-weight: 700; box-shadow: 0 8px 22px rgba(11,27,63,.3);
+    }
+    .lock-btn { display: inline-flex; align-items: center; gap: 7px; }
+
+    /* Request-access popup */
+    .rqdialog { width: min(480px, calc(100% - 32px)); }
+    .rq-body { padding: 34px 30px 30px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+    .rq-icon { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+    .rq-kicker { margin: 6px 0 0; font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+    .rq-body h2 { font-size: 23px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.2; }
+    .rq-body p { margin: 0; font-size: 14.5px; color: var(--body); }
+    .rq-actions { margin-top: 10px; width: 100%; display: flex; flex-direction: column; gap: 10px; }
+    .rq-btn { display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 999px; font-weight: 700; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); }
+    .rq-btn:hover { background: var(--ink); color: var(--bg); }
+    .rq-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .rq-btn.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+
     @media (max-width: 1280px) { .pmain { overflow: visible; } }
     @media (max-width: 860px) {
       .tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
@@ -451,7 +491,7 @@
       <div>
         <p class="eyebrow">PROJECTS</p>
         <h1>Ads, automations and builds I've shipped.</h1>
-        <p>AI UGC first. Open any card to see the brief, what I did and the result.</p>
+        <p>AI UGC first. Open a card for the brief and the result. Locked cards are private client work, shared on request.</p>
       </div>
       <a class="btn" href="index.html#contact">Get in touch
         <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
@@ -483,7 +523,7 @@
           <div class="phone">[Ad 4]</div>
         </div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">AI UGC</span><span>Ad reel · Various brands</span></div>
+          <div class="pmeta"><span class="cat">AI UGC</span><span>Concept ads</span></div>
           <h3>UGC ads that were never filmed</h3>
           <p>Creators, hooks and product moments made with AI, cut for Reels, TikTok and Meta ads.</p>
           <div class="ptags"><span>Higgsfield</span><span>Artlist</span><span>CapCut</span><span>ChatGPT</span></div>
@@ -504,144 +544,72 @@
         </template>
       </article>
 
-      <article class="pcard" data-cat="ugc">
-        <div class="media m-phone"><div class="phone">[9:16 ad video]</div></div>
+      <article class="pcard locked" data-cat="ugc" data-locked>
+        <div class="media m-locked"><div class="phone blurred" style="--h:0deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">AI UGC</span><span>VZN Frames</span></div>
-          <h3>A proven UGC ad, rebuilt with VZN's product</h3>
-          <p>A competitor's winning sunglasses ad, recreated shot for shot with the Safari Polarised and the brand's own AI model.</p>
+          <div class="pmeta"><span class="cat">AI UGC</span><span>Private client</span></div>
+          <h3>A proven ad, rebuilt for a new brand</h3>
+          <p>A competitor ad that was already working, recreated shot for shot with the client's own product and AI model.</p>
           <div class="ptags"><span>Higgsfield</span><span>Artlist</span><span>CapCut</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>VZN wanted a UGC ad with proof already behind it, without booking a creator or a shoot.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Broke the original ad down into its hook, shot list and pacing.</li>
-            <li>Generated every shot with VZN's model wearing the Safari Polarised.</li>
-            <li>Matched the cuts, captions and timing of the original.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result — e.g. hook rate, CTR or ROAS]</p>
-        </template>
       </article>
 
-      <article class="pcard" data-cat="ugc">
-        <div class="media m-phone"><div class="phone">[9:16 ad video]</div></div>
+      <article class="pcard locked" data-cat="ugc" data-locked>
+        <div class="media m-locked"><div class="phone blurred" style="--h:35deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">AI UGC</span><span>VZN Frames</span></div>
-          <h3>A viral POV skit, recast as a sunglasses ad</h3>
-          <p>The "your wife is angry about the 911" skit, remade with VZN's model and the Safari frames as the punchline.</p>
+          <div class="pmeta"><span class="cat">AI UGC</span><span>Private client</span></div>
+          <h3>A trending skit, recast as a product ad</h3>
+          <p>A viral POV format rewritten so the product lands the punchline, made without a single shoot.</p>
           <div class="ptags"><span>Higgsfield</span><span>CapCut</span><span>Script</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>Ride a trending skit format so the ad feels like content, not an ad.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Rewrote the skit so the glasses carry the payoff.</li>
-            <li>Generated the scenes with the brand's recurring model.</li>
-            <li>Edited for sound‑off viewing with burned‑in captions.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result]</p>
-        </template>
       </article>
 
-      <article class="pcard" data-cat="ugc">
-        <div class="media m-phone"><div class="phone">[9:16 ad video]</div></div>
+      <article class="pcard locked" data-cat="ugc" data-locked>
+        <div class="media m-locked"><div class="phone blurred" style="--h:-40deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">AI UGC</span><span>VZN Frames</span></div>
-          <h3>Monaco reaction cam</h3>
-          <p>A 20‑second "reaction cam" ad: the model drives through Monaco, reacts to the view, and the glasses do the talking.</p>
+          <div class="pmeta"><span class="cat">AI UGC</span><span>Private client</span></div>
+          <h3>A reaction‑cam driving ad</h3>
+          <p>A short POV ad: the model drives, reacts to the view, and the product does the talking.</p>
           <div class="ptags"><span>Higgsfield</span><span>Artlist</span><span>CapCut</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>Show the polarised lenses in a setting that matches the brand's quiet‑luxury feel.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Planned a short reaction‑cam storyline with a driving POV.</li>
-            <li>Generated the driver and the scenery with the brand's model.</li>
-            <li>Cut it to 20 seconds with music and captions.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result]</p>
-        </template>
       </article>
 
       <!-- ============ AD CREATIVE ============ -->
 
-      <article class="pcard" data-cat="creative">
-        <div class="media m-still"><div class="still">[Persona sheet or portrait]</div></div>
+      <article class="pcard locked" data-cat="creative" data-locked>
+        <div class="media m-locked"><div class="still blurred" style="--h:20deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Ad Creative</span><span>VZN Frames</span></div>
+          <div class="pmeta"><span class="cat">Ad Creative</span><span>Private client</span></div>
           <h3>One AI model, the same face in every ad</h3>
-          <p>A detailed appearance blueprint for the brand's recurring model, so he looks like the same man in every image and video.</p>
+          <p>A reusable appearance blueprint so a brand's AI model looks like the same person across every image and video.</p>
           <div class="ptags"><span>Gemini</span><span>Higgsfield</span><span>Prompting</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>AI models drift from one generation to the next. A brand needs one recognisable face across every ad.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Defined the persona: age, look, style and wardrobe for a quiet‑luxury audience.</li>
-            <li>Wrote a reusable appearance blueprint used in every prompt.</li>
-            <li>Kept product details accurate, frame by frame.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result — e.g. number of ads using the persona]</p>
-        </template>
       </article>
 
-      <article class="pcard" data-cat="creative">
-        <div class="media m-phone"><div class="phone">[Sub‑15s ad]</div></div>
+      <article class="pcard locked" data-cat="creative" data-locked>
+        <div class="media m-locked"><div class="phone blurred" style="--h:70deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Ad Creative</span><span>VZN Frames</span></div>
+          <div class="pmeta"><span class="cat">Ad Creative</span><span>Private client</span></div>
           <h3>A hybrid ad in under 15 seconds</h3>
-          <p>Stock footage and AI‑generated scenes of the brand's model, cut together into one fast polarised‑sunglasses ad.</p>
+          <p>Stock footage and AI‑generated product scenes cut together so the ad feels like one shoot.</p>
           <div class="ptags"><span>Artlist</span><span>Pexels</span><span>CapCut</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>Make a short ad fast, without shooting anything new.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Picked stock clips that set the scene and the mood.</li>
-            <li>Generated the product shots with the brand's AI model.</li>
-            <li>Blended both so the cut feels like one shoot.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result]</p>
-        </template>
       </article>
 
-      <article class="pcard" data-cat="creative">
-        <div class="media m-still"><div class="still">[Static ad image]</div></div>
+      <article class="pcard locked" data-cat="creative" data-locked>
+        <div class="media m-locked"><div class="still blurred" style="--h:-20deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Ad Creative</span><span>VZN Frames</span></div>
+          <div class="pmeta"><span class="cat">Ad Creative</span><span>Private client</span></div>
           <h3>Product shots on AI models</h3>
-          <p>Static ads with the frames placed on AI models, like an autumn street scene with space left for the headline.</p>
+          <p>Static lifestyle ads with the product placed on AI models, composed with room for the headline.</p>
           <div class="ptags"><span>Gemini</span><span>Photoshop</span><span>Canva</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>Lifestyle images of the product on a model, without a photoshoot.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Wrote prompts that keep the frame, lens and logo details right.</li>
-            <li>Composed each image with room for ad copy.</li>
-            <li>Finished and resized the images for each placement.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result]</p>
-        </template>
       </article>
 
       <!-- ============ AUTOMATIONS ============ -->
@@ -725,27 +693,15 @@
 
       <!-- ============ WEB & EMAIL ============ -->
 
-      <article class="pcard" data-cat="web">
-        <div class="media m-browser"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><div class="screen">[Advertorial screenshot]</div></div>
+      <article class="pcard locked" data-cat="web" data-locked>
+        <div class="media m-locked m-browser"><div class="bar" aria-hidden="true"><i></i><i></i><i></i></div><div class="screen blurred" style="--h:10deg" aria-hidden="true"></div><span class="lock-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Private client work</span></div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Web &amp; Email</span><span>VZN Frames</span></div>
-          <h3>An 11‑section advertorial, written and built</h3>
-          <p>Quiet‑luxury copy for the St Barts⁺ Safari Polarised, built in GemPages, plus a design system for every page after it.</p>
+          <div class="pmeta"><span class="cat">Web &amp; Email</span><span>Private client</span></div>
+          <h3>A long‑form advertorial, written and built</h3>
+          <p>An 11‑section sales page for a hero product: the copy, the Shopify build and a design system for the pages after it.</p>
           <div class="ptags"><span>Shopify</span><span>GemPages</span><span>Copywriting</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <button type="button" class="open lock-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Request to view</button>
         </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>A long‑form page that sells the hero product to cold traffic from ads.</p>
-          <h4>What I did</h4>
-          <ul>
-            <li>Wrote all 11 sections in a quiet‑luxury voice.</li>
-            <li>Built the page section by section in GemPages.</li>
-            <li>Documented a brand design system so future pages stay consistent.</li>
-          </ul>
-          <h4>Result</h4>
-          <p class="res">[Result — e.g. conversion rate after launch]</p>
-        </template>
       </article>
 
       <article class="pcard" data-cat="web">
@@ -822,6 +778,23 @@
   </main>
 </div>
 
+<!-- Request-access popup for locked cards -->
+<dialog class="pdialog rqdialog" id="rqdialog" aria-labelledby="rq-title">
+  <button type="button" class="pd-close" id="rqClose" aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <div class="rq-body">
+    <span class="rq-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    <p class="rq-kicker">Private client work</p>
+    <h2 id="rq-title"></h2>
+    <p>This one was made for a client I can't name in public. I'm happy to walk you through the real ads on a short call, or send you a private link.</p>
+    <div class="rq-actions">
+      <a class="rq-btn primary" id="rqEmail" href="#">Request access</a>
+      <a class="rq-btn" id="rqBook" href="#">Book a 15‑min call</a>
+    </div>
+  </div>
+</dialog>
+
 <!-- Project detail popup -->
 <dialog class="pdialog" id="pdialog" aria-labelledby="pd-title">
   <button type="button" class="pd-close" id="pdClose" aria-label="Close">
@@ -855,6 +828,7 @@
 </script>
 <script>
   // ----- Filter tabs (also reads #ugc, #creative, #auto, #web from the URL)
+  let lastOpener = null;
   const tabs = [...document.querySelectorAll('.ftab')];
   const cards = [...document.querySelectorAll('.pcard')];
   const empty = document.getElementById('empty');
@@ -876,11 +850,31 @@
   const start = location.hash.slice(1);
   if (tabs.some(t => t.dataset.filter === start)) applyFilter(start);
 
+  // ----- Where "Request access" and "Book a call" go. Edit these two lines.
+  const REQUEST_EMAIL = '[your email]';   // e.g. 'hello@scalewithsen.com'
+  const BOOK_URL = '#';                   // e.g. your free Calendly or Cal.com link
+
+  // ----- Request-access popup for locked cards
+  const rq = document.getElementById('rqdialog');
+  function openRequest(card, opener) {
+    const title = card.querySelector('h3').textContent;
+    document.getElementById('rq-title').textContent = title;
+    const subject = 'Private work request: ' + title;
+    const body = 'Hi Sen,\n\nI saw "' + title + '" on your portfolio and would like to see it.\n\nName:\nCompany:\nWhat I am working on:\n';
+    document.getElementById('rqEmail').href = 'mailto:' + REQUEST_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    document.getElementById('rqBook').href = BOOK_URL;
+    lastOpener = opener;
+    rq.showModal();
+  }
+  document.getElementById('rqClose').addEventListener('click', () => rq.close());
+  rq.addEventListener('click', e => { if (e.target === rq) rq.close(); });
+  rq.addEventListener('close', () => { if (lastOpener) lastOpener.focus(); });
+
   // ----- Project detail popup
   const dlg = document.getElementById('pdialog');
   const pdMedia = document.getElementById('pdMedia');
-  let lastOpener = null;
   function openCard(card, opener) {
+    if (card.hasAttribute('data-locked')) { openRequest(card, opener); return; }
     pdMedia.replaceChildren(card.querySelector('.media').cloneNode(true));
     document.getElementById('pdMeta').innerHTML = card.querySelector('.pmeta').innerHTML;
     document.getElementById('pd-title').textContent = card.querySelector('h3').textContent;
