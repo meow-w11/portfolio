@@ -390,6 +390,23 @@
     .pstats strong { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
     .pstats span { font-size: 11.5px; color: var(--muted); }
     .pd-media .m-system { height: auto; min-height: 300px; }
+    .pstats.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    /* Flow list mock (email & SMS card) */
+    .m-list { padding: 24px 28px; background: radial-gradient(#C9D3EA 1px, transparent 1px) 0 0 / 14px 14px, #F2F5FC; }
+    :root[data-theme="dark"] .m-list { background: radial-gradient(#2A3555 1px, transparent 1px) 0 0 / 14px 14px, #151B28; }
+    .flist { width: 100%; max-width: 640px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 26px rgba(11,27,63,.10); overflow: hidden; color: #0B1B3F; }
+    .fl-row { display: grid; grid-template-columns: minmax(0, 1fr) 96px 78px; align-items: center; gap: 10px; padding: 8px 16px; border-top: 1px solid #EDEEF1; font-size: 12.5px; }
+    .fl-head { border-top: 0; background: #F6F7FA; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #5F6676; padding: 9px 16px; }
+    .fl-name { font-weight: 700; min-width: 0; }
+    .fl-name small { display: block; font-weight: 500; font-size: 11px; color: #5F6676; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .fl-plat { font-size: 11px; font-weight: 600; color: #3D4659; }
+    .fl-num { font-weight: 800; color: var(--accent); text-align: right; }
+    .fl-head span:last-child { text-align: right; }
+    .fl-live { justify-self: end; display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: #1A7F47; }
+    .fl-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #1E9E57; }
+    .pd-media .m-list { height: auto; }
+    .pd-text b { color: var(--ink); }
 
     /* Locked (private) cards: the blur is a generated pattern, never real client media */
     .m-locked { background: linear-gradient(180deg, #E4E8F2, #EEF0F5); }
@@ -443,6 +460,8 @@
       .sys-row .link { flex: 0 0 16px; width: 2px; height: 16px; align-self: center; }
       .sys-row .link::after { right: -4px; top: auto; bottom: -1px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #8FA9E8; border-bottom: 0; }
       .pstats strong { font-size: 19px; }
+      .m-list { padding: 16px 12px; }
+      .fl-row { grid-template-columns: minmax(0, 1fr) 70px 54px; padding: 8px 10px; gap: 6px; }
       .pd-media .media { height: 260px; }
     }
     @media (prefers-reduced-motion: reduce) { .pcard { transition: none; } .pcard:hover { transform: none; } }
@@ -682,30 +701,45 @@
         </template>
       </article>
 
-      <article class="pcard" data-cat="auto">
-        <div class="media m-flow">
-          <div class="node">Stripe export</div><div class="link" aria-hidden="true"></div>
-          <div class="node hot">Filter &amp; clean</div><div class="link" aria-hidden="true"></div>
-          <div class="node">Google Sheet</div>
+      <!-- Featured: email & SMS flows. Figures come from the real Omnisend dashboards (open rate = unique opens). -->
+      <article class="pcard wide" data-cat="auto">
+        <div class="media m-list">
+          <div class="flist" aria-label="A sample of flows I built">
+            <div class="fl-row fl-head"><span>Flow</span><span>Platform</span><span>Open rate</span></div>
+            <div class="fl-row"><span class="fl-name">Abandoned cart<small>2 emails, first after 1 hour</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">32.9%</span></div>
+            <div class="fl-row"><span class="fl-name">Review request<small>1 week after delivery</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">31.9%</span></div>
+            <div class="fl-row"><span class="fl-name">Free template opt‑in<small>Lead magnet delivery</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">32%</span></div>
+            <div class="fl-row"><span class="fl-name">Welcome series<small>New subscribers</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">29%</span></div>
+            <div class="fl-row"><span class="fl-name">Treatment retention ×9<small>Timed to each treatment cycle</small></span><span class="fl-plat">Omnisend</span><span class="fl-live">Live</span></div>
+            <div class="fl-row"><span class="fl-name">Back‑in‑stock alert<small>Product restocked</small></span><span class="fl-plat">Wix</span><span class="fl-live">Live</span></div>
+            <div class="fl-row"><span class="fl-name">Failed payment follow‑up<small>Grace period starts</small></span><span class="fl-plat">Wix</span><span class="fl-live">Live</span></div>
+          </div>
         </div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Automations</span><span>Spa league</span></div>
-          <h3>Clean member lists from messy Stripe exports</h3>
-          <p>Turned raw subscription exports into clear, shareable member lists in Google Sheets.</p>
-          <div class="ptags"><span>Stripe</span><span>Google Sheets</span></div>
+          <div class="pmeta"><span class="cat">Automations</span><span>Small businesses · Email &amp; SMS</span></div>
+          <h3>The email flows every business should have</h3>
+          <p>Set up for businesses that had none: cart reminders, welcome series, review requests, and treatment reminders that bring clients back on time.</p>
+          <div class="pstats three">
+            <div><strong>35+</strong><span>flows built</span></div>
+            <div><strong>4</strong><span>platforms</span></div>
+            <div><strong>~30%</strong><span>open rates</span></div>
+          </div>
+          <div class="ptags"><span>Omnisend</span><span>Wix Automations</span><span>Klaviyo</span><span>Mailchimp</span><span>SMS</span></div>
           <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
         </div>
         <template class="detail">
           <h4>The brief</h4>
-          <p>The team needed to know who was an active member without digging through Stripe.</p>
-          <h4>What I did</h4>
+          <p>Most of the small businesses I work with had a store, a booking page and an email list, but nothing running in between. No cart reminder, no welcome email, and no reason for a past client to come back.</p>
+          <h4>What I set up</h4>
           <ul>
-            <li>Filtered the subscription exports down to the members that mattered.</li>
-            <li>Cleaned and organised the data into one Google Sheet.</li>
-            <li>Delivered a list the team could use straight away.</li>
+            <li><b>Sales flows:</b> abandoned cart recovery, back‑in‑stock alerts, cross‑sells after purchase (with the send delay A/B tested), and review requests a week after delivery.</li>
+            <li><b>Welcome and lead flows:</b> welcome series, free guide and template opt‑ins, text‑to‑join SMS sign‑ups, and a Facebook lead to booked consult flow.</li>
+            <li><b>Retention for a med‑spa:</b> nine treatment reminder cycles, each timed to when the client is due back, from every 3 weeks for dermaplaning to every 9 months for lip filler. Plus booking confirmations by email and SMS, and a post‑treatment upsell and review flow.</li>
+            <li><b>Keeping lists clean:</b> an inactive win‑back that either re‑warms contacts or suppresses them, failed‑payment follow‑ups, and member lists rebuilt from messy Stripe exports.</li>
           </ul>
           <h4>Result</h4>
-          <p class="res">[Result]</p>
+          <p class="res">Open rates of around 30% on the flows with tracked data: 32.9% on abandoned cart, 31.9% on review requests, 32% on opt‑ins. One review request email brought in a $335 order on its own.</p>
+          <p>Built in Omnisend and Wix for current clients, and in Klaviyo and Mailchimp for past clients.</p>
         </template>
       </article>
 
