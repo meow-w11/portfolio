@@ -379,6 +379,18 @@
     .pd-text .res { font-weight: 700; color: var(--ink); background: var(--accent-soft); border-radius: 12px; padding: 10px 14px; }
     .pd-close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #0B1B3F; cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow); }
 
+    /* Featured system diagram + stat strip */
+    .m-system { flex-direction: column; gap: 18px; padding: 26px 28px; }
+    .sys-row { display: flex; align-items: center; width: 100%; }
+    .sys-row .node { padding: 12px 8px; }
+    .node small { display: block; margin-top: 3px; font-size: 10.5px; font-weight: 500; opacity: .75; }
+    .pstats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 6px 0 4px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); }
+    .pstats div { padding: 10px 6px; text-align: center; }
+    .pstats div + div { border-left: 1px solid var(--line); }
+    .pstats strong { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+    .pstats span { font-size: 11.5px; color: var(--muted); }
+    .pd-media .m-system { height: auto; min-height: 300px; }
+
     /* Locked (private) cards: the blur is a generated pattern, never real client media */
     .m-locked { background: linear-gradient(180deg, #E4E8F2, #EEF0F5); }
     .blurred { position: relative; overflow: hidden; padding: 0; }
@@ -427,6 +439,10 @@
       .pcard.wide .media { min-height: 240px; flex: none; }
       .pcard.wide .pbody { padding: 18px; }
       .m-reel .phone:nth-child(n+3) { display: none; }
+      .sys-row { flex-direction: column; align-items: stretch; }
+      .sys-row .link { flex: 0 0 16px; width: 2px; height: 16px; align-self: center; }
+      .sys-row .link::after { right: -4px; top: auto; bottom: -1px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #8FA9E8; border-bottom: 0; }
+      .pstats strong { font-size: 19px; }
       .pd-media .media { height: 260px; }
     }
     @media (prefers-reduced-motion: reduce) { .pcard { transition: none; } .pcard:hover { transform: none; } }
@@ -614,30 +630,55 @@
 
       <!-- ============ AUTOMATIONS ============ -->
 
-      <article class="pcard" data-cat="auto">
-        <div class="media m-flow">
-          <div class="node">Student enrolls</div><div class="link" aria-hidden="true"></div>
-          <div class="node hot">Wix Automation</div><div class="link" aria-hidden="true"></div>
-          <div class="node">PDF sent instantly</div>
+      <!-- Featured automation: HerWay Training Institute.
+           Use sample data only in any screenshot: no real student names, IDs or documents. -->
+      <article class="pcard wide" data-cat="auto">
+        <div class="media m-flow m-system">
+          <div class="sys-row">
+            <div class="node">Course bought<small>Wix</small></div><div class="link" aria-hidden="true"></div>
+            <div class="node">Enrollment form<small>Google Forms</small></div><div class="link" aria-hidden="true"></div>
+            <div class="node hot">Make.com<small>4‑path router</small></div><div class="link" aria-hidden="true"></div>
+            <div class="node">Folder, packet, email<small>Drive · Autocrat · Gmail</small></div>
+          </div>
+          <div class="sys-row">
+            <div class="node">Document upload<small>Onboarding portal</small></div><div class="link" aria-hidden="true"></div>
+            <div class="node hot">Make.com<small>Rename &amp; route</small></div><div class="link" aria-hidden="true"></div>
+            <div class="node">Filed to student folder<small>Google Drive</small></div>
+          </div>
         </div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Automations</span><span>EKG training school</span></div>
-          <h3>An enrollment flow that delivers on its own</h3>
-          <p>Replaced a Google Form step with a direct PDF download, so new students get their materials the moment they enroll.</p>
-          <div class="ptags"><span>Wix Automations</span><span>Google Forms</span></div>
+          <div class="pmeta"><span class="cat">Automations</span><span>HerWay Training Institute</span></div>
+          <h3>A student enrollment system that runs itself</h3>
+          <p>One form now creates each student's folder, generates their paperwork, files their documents and sends the welcome email, across four allied health programs.</p>
+          <div class="pstats">
+            <div><strong>4</strong><span>programs</span></div>
+            <div><strong>3</strong><span>forms</span></div>
+            <div><strong>2</strong><span>Make.com scenarios</span></div>
+            <div><strong>1</strong><span>master database</span></div>
+          </div>
+          <div class="ptags"><span>Make.com</span><span>Google Forms</span><span>Google Sheets</span><span>Google Drive</span><span>Autocrat</span><span>Gmail</span><span>Wix Automations</span></div>
           <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
         </div>
         <template class="detail">
           <h4>The brief</h4>
-          <p>Students had to fill in an extra form before getting their course materials.</p>
-          <h4>What I did</h4>
+          <p>HerWay Training Institute runs four programs: EKG Technician, Phlebotomy, Medical Assistant and Massage Therapy. Every new student meant manual work for the admin team: making a folder, filling in a ledger and transcript, collecting IDs and diplomas by email, and tracking attendance on shared Google Docs.</p>
+          <h4>What I built</h4>
           <ul>
-            <li>Mapped the existing Wix Automations workflow.</li>
-            <li>Swapped the form step for a direct PDF download link.</li>
-            <li>Tested the flow end to end as a new student.</li>
+            <li>A Master Student Enrollment Form feeding one Google Sheets database, with admin roster tabs for each program that filter by start month.</li>
+            <li>A Make.com scenario with a router path for each program: it creates the student's Drive folder, generates their Master Packet (financial ledger and academic transcript) with Autocrat, files it, shares the folder and sends a welcome email through Gmail.</li>
+            <li>A second scenario for the Student Onboarding Portal that catches uploaded IDs, diplomas and vaccination records, renames them and moves them into the right student's folder.</li>
+            <li>A daily check‑in form that logs attendance with a timestamp, replacing the attendance Google Docs students used to sign.</li>
+            <li>Program‑specific Wix post‑purchase emails, including a three‑email EKG sequence (right away, after 5 hours, after 24 hours) that gives the folder time to exist before students upload.</li>
+            <li>A plain‑language SOP for the admin team: the order students must follow, and what never to rename.</li>
+          </ul>
+          <h4>Problems I solved along the way</h4>
+          <ul>
+            <li>Uploads arriving before a student's folder existed crashed the file routing. Fixed with the order of operations, timed delays and the spaced email sequence.</li>
+            <li>Generating three documents per student kept stalling. Merged them into one Master Packet, cutting the generation jobs per program from three to one.</li>
+            <li>Kept two scenarios inside the client's plan limits, and made every change on a duplicate of the live automation first, so nothing broke for students mid‑enrollment.</li>
           </ul>
           <h4>Result</h4>
-          <p class="res">[Result — e.g. one less step, fewer support emails]</p>
+          <p class="res">[Result — e.g. hours of admin work saved per cohort, or students enrolled since launch]</p>
         </template>
       </article>
 
@@ -668,28 +709,6 @@
         </template>
       </article>
 
-      <article class="pcard" data-cat="auto">
-        <div class="media m-flow">
-          <div class="node">[Trigger]</div><div class="link" aria-hidden="true"></div>
-          <div class="node hot">Make.com</div><div class="link" aria-hidden="true"></div>
-          <div class="node">[Result]</div>
-        </div>
-        <div class="pbody">
-          <div class="pmeta"><span class="cat">Automations</span><span>[Client]</span></div>
-          <h3>[Your next automation]</h3>
-          <p>[One line on what it does, e.g. new Shopify orders tagged and sent to Klaviyo automatically.]</p>
-          <div class="ptags"><span>Make.com</span><span>[Tool]</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
-        </div>
-        <template class="detail">
-          <h4>The brief</h4>
-          <p>[What was slow or manual before.]</p>
-          <h4>What I did</h4>
-          <ul><li>[Step 1]</li><li>[Step 2]</li><li>[Step 3]</li></ul>
-          <h4>Result</h4>
-          <p class="res">[Hours saved per week, or errors removed]</p>
-        </template>
-      </article>
 
       <!-- ============ WEB & EMAIL ============ -->
 
