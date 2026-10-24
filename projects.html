@@ -401,7 +401,8 @@
     .fl-name { font-weight: 700; min-width: 0; }
     .fl-name small { display: block; font-weight: 500; font-size: 11px; color: #5F6676; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .fl-plat { font-size: 11px; font-weight: 600; color: #3D4659; }
-    .fl-num { font-weight: 800; color: var(--accent); text-align: right; }
+    .fl-num { font-weight: 800; color: var(--accent); text-align: right; line-height: 1.2; }
+    .fl-num small { display: block; font-size: 10.5px; font-weight: 600; color: #5F6676; }
     .fl-head span:last-child { text-align: right; }
     .fl-live { justify-self: end; display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: #1A7F47; }
     .fl-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #1E9E57; }
@@ -701,18 +702,18 @@
         </template>
       </article>
 
-      <!-- Featured: email & SMS flows. Figures come from the real Omnisend dashboards (open rate = unique opens). -->
+      <!-- Featured: email & SMS flows. Figures come from the real Omnisend dashboards. $1,315 = $825 + $335.50 + $125 + $30 (flows with tracked revenue). -->
       <article class="pcard wide" data-cat="auto">
         <div class="media m-list">
           <div class="flist" aria-label="A sample of flows I built">
-            <div class="fl-row fl-head"><span>Flow</span><span>Platform</span><span>Open rate</span></div>
-            <div class="fl-row"><span class="fl-name">Abandoned cart<small>2 emails, first after 1 hour</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">32.9%</span></div>
-            <div class="fl-row"><span class="fl-name">Review request<small>1 week after delivery</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">31.9%</span></div>
-            <div class="fl-row"><span class="fl-name">Free template opt‑in<small>Lead magnet delivery</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">32%</span></div>
-            <div class="fl-row"><span class="fl-name">Welcome series<small>New subscribers</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">29%</span></div>
+            <div class="fl-row fl-head"><span>Flow</span><span>Platform</span><span>Result</span></div>
+            <div class="fl-row"><span class="fl-name">Abandoned checkout<small>First email 1 hour after checkout starts</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">$825<small>7 orders</small></span></div>
+            <div class="fl-row"><span class="fl-name">Review request<small>1 week after delivery</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">$335<small>1 order</small></span></div>
+            <div class="fl-row"><span class="fl-name">Free template opt‑in<small>Lead magnet delivery</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">$125<small>1 order</small></span></div>
+            <div class="fl-row"><span class="fl-name">Abandoned cart<small>2 emails, first after 1 hour</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">32.9%<small>open rate</small></span></div>
+            <div class="fl-row"><span class="fl-name">Welcome series<small>New subscribers</small></span><span class="fl-plat">Omnisend</span><span class="fl-num">29%<small>open rate</small></span></div>
             <div class="fl-row"><span class="fl-name">Treatment retention ×9<small>Timed to each treatment cycle</small></span><span class="fl-plat">Omnisend</span><span class="fl-live">Live</span></div>
             <div class="fl-row"><span class="fl-name">Back‑in‑stock alert<small>Product restocked</small></span><span class="fl-plat">Wix</span><span class="fl-live">Live</span></div>
-            <div class="fl-row"><span class="fl-name">Failed payment follow‑up<small>Grace period starts</small></span><span class="fl-plat">Wix</span><span class="fl-live">Live</span></div>
           </div>
         </div>
         <div class="pbody">
@@ -720,9 +721,9 @@
           <h3>The email flows every business should have</h3>
           <p>Set up for businesses that had none: cart reminders, welcome series, review requests, and treatment reminders that bring clients back on time.</p>
           <div class="pstats three">
-            <div><strong>35+</strong><span>flows built</span></div>
+            <div><strong>45+</strong><span>flows built</span></div>
             <div><strong>4</strong><span>platforms</span></div>
-            <div><strong>~30%</strong><span>open rates</span></div>
+            <div><strong>$1,315</strong><span>in tracked orders</span></div>
           </div>
           <div class="ptags"><span>Omnisend</span><span>Wix Automations</span><span>Klaviyo</span><span>Mailchimp</span><span>SMS</span></div>
           <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
@@ -738,7 +739,7 @@
             <li><b>Keeping lists clean:</b> an inactive win‑back that either re‑warms contacts or suppresses them, failed‑payment follow‑ups, and member lists rebuilt from messy Stripe exports.</li>
           </ul>
           <h4>Result</h4>
-          <p class="res">Open rates of around 30% on the flows with tracked data: 32.9% on abandoned cart, 31.9% on review requests, 32% on opt‑ins. One review request email brought in a $335 order on its own.</p>
+          <p class="res">The flows with tracked revenue have brought in $1,315 in orders so far. $825 of that came from one abandoned checkout flow: 7 orders, with a 6.6% click rate. Open rates sit at around 30–33% across the board.</p>
           <p>Built in Omnisend and Wix for current clients, and in Klaviyo and Mailchimp for past clients.</p>
         </template>
       </article>
