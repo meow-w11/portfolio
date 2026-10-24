@@ -292,6 +292,18 @@
       .track { animation: none; }
       .icon-btn, .float { transition: none; }
     }
+
+    /* Projects preview card */
+    .proj-list a { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 500; color: var(--body); text-decoration: none; }
+    .proj-list a::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; }
+    .proj-list a:hover { color: var(--accent); }
+    .card-go { margin-left: auto; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); background: var(--chip); }
+    .card-go:hover { color: #fff; background: var(--accent); }
+    a.shot { position: relative; text-decoration: none; }
+    .shot .slide { position: absolute; inset: 0; display: grid; place-items: center; padding: 12px; text-align: center; opacity: 0; transition: opacity .5s ease; }
+    .shot .slide.is-on { opacity: 1; }
+    .shot .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .shot .slide:has(img) { padding: 0; }
   </style>
 </head>
 <body>
@@ -325,8 +337,8 @@
     </div>
 
     <nav class="nav" aria-label="Main">
-      <a href="#" aria-current="page"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2 2.8 11H5v9h5v-6h4v6h5v-9h2.2L12 3.2Z"/></svg>Home</a>
-      <a href="#projects"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h4l2 2.2h7A2.5 2.5 0 0 1 21 8.7v8.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Z"/></svg>Projects</a>
+      <a href="./" aria-current="page"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2 2.8 11H5v9h5v-6h4v6h5v-9h2.2L12 3.2Z"/></svg>Home</a>
+      <a href="projects.html"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h4l2 2.2h7A2.5 2.5 0 0 1 21 8.7v8.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Z"/></svg>Projects</a>
       <a href="#services"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 2 7.8l10 5.3 10-5.3-10-5.3Zm-7.7 9.7L2 13.4l10 5.3 10-5.3-2.3-1.2-7.7 4.1-7.7-4.1Zm0 4.6L2 18l10 5.3L22 18l-2.3-1.2-7.7 4.1-7.7-4.1Z"/></svg>Services</a>
       <a href="#creative"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2Z"/></svg>AI Creative</a>
       <a href="#clients"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8 2.9-6Z"/></svg>Testimonials</a>
@@ -437,25 +449,31 @@
             <div class="sig"><span aria-hidden="true"></span>scalewithsen.com · Follow for more</div>
           </section>
 
-          <!-- Projects -->
+          <!-- Projects (previews of projects.html) -->
           <section class="card projects" id="projects" aria-labelledby="h-projects">
             <div class="row">
               <div>
                 <div class="card-head">
                   <span class="ico"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h4l2 2.2h7A2.5 2.5 0 0 1 21 8.7v8.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Z"/></svg></span>
                   <h2 id="h-projects">Projects</h2>
+                  <a class="card-go" href="projects.html" aria-label="See all projects"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
                 </div>
-                <p class="sub">Landing pages, store builds and campaigns for real brands.</p>
+                <p class="sub">AI UGC ads, automations and builds for real brands.</p>
                 <div class="proj-list">
-                  <span>[Project 1 · e.g. Shopify advertorial]</span>
-                  <span>[Project 2 · e.g. Email + SMS campaign]</span>
-                  <span>[Project 3 · e.g. Wix homepage redesign]</span>
-                  <span>[Project 4 · e.g. Palengke List app]</span>
+                  <a href="projects.html#ugc">AI UGC ads for VZN Frames</a>
+                  <a href="projects.html#creative">One AI model, every ad</a>
+                  <a href="projects.html#auto">Wix + Stripe automations</a>
+                  <a href="projects.html#web">Advertorials &amp; email campaigns</a>
                 </div>
               </div>
               <div class="stack">
                 <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
-                <div class="shot">[Screenshot of your best project]</div>
+                <!-- Swap each slide's text for an image: <img src="images/preview-1.jpg" alt=""> -->
+                <a class="shot" href="projects.html" aria-label="Open projects">
+                  <span class="slide is-on">[Best AI UGC ad still]</span>
+                  <span class="slide">[Best static ad]</span>
+                  <span class="slide">[Best page or automation]</span>
+                </a>
                 <div class="shot-under" aria-hidden="true"></div>
               </div>
             </div>
@@ -541,6 +559,21 @@
   try { saved = localStorage.getItem('theme'); } catch (e) {}
   setTheme(saved || 'light');
   toggle.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+</script>
+
+<script>
+  // Rotate the project previews on the homepage card
+  (function () {
+    const slides = document.querySelectorAll('.shot .slide');
+    const dots = document.querySelectorAll('.projects .dots i');
+    if (slides.length < 2 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let i = 0;
+    setInterval(() => {
+      slides[i].classList.remove('is-on'); dots[i] && dots[i].classList.remove('on');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-on'); dots[i] && dots[i].classList.add('on');
+    }, 3500);
+  })();
 </script>
 </body>
 </html>
