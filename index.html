@@ -319,6 +319,60 @@
     .qd { width: 32px; height: 32px; }
     @media (max-width: 1024px), (pointer: coarse) { .proj-text .proj-list a { min-height: 40px !important; } }
 
+    a.sig { text-decoration: none; color: inherit; }
+    a.sig:hover { color: var(--accent); }
+    /* ---- Nav: work-in-progress items ---- */
+    .nav .wip { display: flex; align-items: center; gap: 16px; min-height: 46px; padding: 0 18px; border-radius: 12px; font-weight: 500; font-size: 16px; color: var(--muted); cursor: default; white-space: nowrap; }
+    .nav .wip .i { color: #A9B6D6; width: 19px; height: 19px; }
+    .nav .wip em { margin-left: auto; font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+    @media (max-width: 860px) { .nav .wip { flex: none; font-size: 14.5px; gap: 10px; } .nav .wip em { margin-left: 4px; } }
+
+    /* ---- Testimonials: stacked glass panels ---- */
+    .tstack { position: relative; flex: 1; margin-top: 14px; padding: 28px 22px 0 14px; isolation: isolate; }
+    .tblob { position: absolute; z-index: -1; border-radius: 50%; filter: blur(24px); opacity: .7; pointer-events: none; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+    .tblob.a { width: 46%; height: 70%; left: 4%; top: 6%; background: #4F78D9; }
+    .tblob.b { width: 36%; height: 60%; right: 6%; bottom: 0; background: #F2A65A; }
+    .tg-deck { display: grid; }
+    .tg {
+      grid-area: 1 / 1; margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+      padding: 20px 22px 16px; border-radius: 20px;
+      background: rgba(255,255,255,.58); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
+      border: 1px solid rgba(255,255,255,.85); box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 14px 34px rgba(11,27,63,.14);
+      transform-origin: 50% 100%; will-change: transform, opacity;
+      transition: transform .7s cubic-bezier(.2,.75,.2,1), opacity .55s ease, filter .55s ease;
+      opacity: 0; pointer-events: none; transform: translate(0, -46px) scale(.84);
+    }
+    .tg[data-pos="0"] { opacity: 1; pointer-events: auto; transform: none; z-index: 4; }
+    .tg[data-pos="1"] { opacity: .9; transform: translate(-12px, -16px) rotate(-2.6deg) scale(.95); z-index: 3; filter: saturate(.9); }
+    .tg[data-pos="2"] { opacity: .65; transform: translate(14px, -30px) rotate(2.4deg) scale(.9); z-index: 2; filter: saturate(.8); }
+    .tg[data-pos="out"] { opacity: 0; transform: translate(70%, 18px) rotate(9deg) scale(.96); z-index: 5; }
+    .tg[data-pos="in"]  { opacity: 0; transform: translate(-70%, 18px) rotate(-9deg) scale(.96); z-index: 5; transition: none; }
+    .tg > * { transition: opacity .45s ease .15s; }
+    .tg:not([data-pos="0"]) > * { opacity: 0; transition-delay: 0s; }
+    .tg blockquote { margin: 0; }
+    .tg blockquote p { margin: 0; font-size: clamp(15px, 1.12vw, 18.5px); font-weight: 700; line-height: 1.38; letter-spacing: -0.015em; color: var(--ink); }
+    .tg figcaption { display: flex; align-items: center; gap: 11px; }
+    .tg-av { width: 38px; height: 38px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 13px; font-weight: 800; color: #fff; background: radial-gradient(circle at 30% 25%, #4F78D9, #1F5BD8 60%, #0B1B3F); }
+    .tg-who { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+    .tg-who b { font-size: 14px; color: var(--ink); }
+    .tg-who span { font-size: 12.5px; color: var(--muted); }
+    .tg-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    @media (min-width: 1281px) and (min-height: 821px) {
+      .clients .bubbles { display: none; }
+      .services .sub { display: none; }
+      .services .svc { margin-top: 10px; }
+      .svc li a { min-height: 32px; }
+    }
+    @media (max-width: 480px) { .tg-count { display: none; } .clients .card-head h2 { font-size: 19px; } }
+    .tg-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--white); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .tg-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .tg-count { min-width: 44px; text-align: center; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .tg-count b { color: var(--ink); }
+    :root[data-theme="dark"] .tg { background: rgba(32,39,54,.55); border-color: rgba(255,255,255,.12); box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 14px 34px rgba(0,0,0,.4); }
+    :root[data-theme="dark"] .tblob { opacity: .4; }
+    @media (max-width: 860px) { .tstack { padding: 28px 14px 4px 10px; } .tg { padding: 18px 18px 14px; } }
+    @media (prefers-reduced-motion: reduce) { .tg, .tblob { transition: opacity .2s ease; } }
+
     /* Projects preview card */
     .proj-list a { display: flex; align-items: center; gap: 9px; min-height: 32px; font-size: 13px; font-weight: 500; color: var(--body); text-decoration: none; }
     .proj-list { gap: 0 !important; margin-top: 8px !important; }
@@ -439,7 +493,7 @@
       <a class="icon-btn" href="https://github.com/meow-w11" target="_blank" rel="noopener" aria-label="GitHub">
         <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
       </a>
-      <a class="icon-btn" href="#contact" aria-label="Email">
+      <a class="icon-btn" href="mailto:sentngc@gmail.com?subject=Project%20inquiry%20from%20your%20portfolio" aria-label="Email">
         <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
       </a>
       <button class="icon-btn" type="button" id="themeToggle" aria-label="Switch to dark mode">
@@ -452,9 +506,9 @@
       <a href="projects.html"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h4l2 2.2h7A2.5 2.5 0 0 1 21 8.7v8.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Z"/></svg>Projects</a>
       <a href="services.html"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 2 7.8l10 5.3 10-5.3-10-5.3Zm-7.7 9.7L2 13.4l10 5.3 10-5.3-2.3-1.2-7.7 4.1-7.7-4.1Zm0 4.6L2 18l10 5.3L22 18l-2.3-1.2-7.7 4.1-7.7-4.1Z"/></svg>Services</a>
       <a href="#clients"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.5 2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6-4.9-4.6 6.6-.8 2.9-6Z"/></svg>Testimonials</a>
-      <a href="#about"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0h-17Z"/></svg>About</a>
-      <a href="#contact"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4 21.5l4.5-2.2c1.1.3 2.3.5 3.5.5 5.5 0 10-3.8 10-8.3S17.5 3 12 3Z"/></svg>FAQs / Contact</a>
-      <a href="#resources"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/></svg>Free Resources</a>
+      <span class="wip" aria-disabled="true" title="Work in progress"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21a8.5 8.5 0 0 1 17 0h-17Z"/></svg>About<em>Soon</em></span>
+      <a href="mailto:sentngc@gmail.com?subject=Project%20inquiry%20from%20your%20portfolio"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1L4 21.5l4.5-2.2c1.1.3 2.3.5 3.5.5 5.5 0 10-3.8 10-8.3S17.5 3 12 3Z"/></svg>Contact</a>
+      <span class="wip" aria-disabled="true" title="Work in progress"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/></svg>Free Resources<em>Soon</em></span>
     </nav>
 
     <div class="side-foot">
@@ -479,7 +533,7 @@
         <h1>Ads that sell. Systems that run.</h1>
         <p>AI UGC ads, product creative and automations for e‑commerce and beauty brands.</p>
       </div>
-      <a class="btn" href="#contact" id="contact">Get in touch
+      <a class="btn" href="mailto:sentngc@gmail.com?subject=Project%20inquiry%20from%20your%20portfolio" id="contact">Get in touch
         <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
     </div>
@@ -552,7 +606,7 @@
             <div class="rule" aria-hidden="true"></div>
             <div class="roles">AI UGC CREATOR · AD CREATIVE<br>AUTOMATIONS · LA UNION</div>
             <div class="tag">No camera. No cast.<br><b>Just ads that sell.</b></div>
-            <div class="sig"><span aria-hidden="true"></span>scalewithsen.com · Follow for more</div>
+            <a class="sig" href="https://www.linkedin.com/in/sentaningco/" target="_blank" rel="noopener"><span aria-hidden="true"></span>Follow on LinkedIn</a>
           </section>
 
           <!-- Projects (real previews from projects.html) -->
@@ -607,18 +661,19 @@
           <section class="card clients" id="clients" aria-labelledby="h-clients">
             <div class="card-head">
               <span class="ico"><svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 11.5C4 8 6.2 5.5 9.5 5v2.4C8 7.9 7.2 9 7.1 10.5H10V18H4v-6.5Zm10 0C14 8 16.2 5.5 19.5 5v2.4c-1.5.5-2.3 1.6-2.4 3.1H20V18h-6v-6.5Z"/></svg></span>
-              <h2 id="h-clients">Testimonials</h2>
+              <h2 id="h-clients">Testimonials</h2><div class="tg-nav"><button type="button" class="tg-btn" data-dir="-1" aria-label="Previous testimonial"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><span class="tg-count"><b>1</b> / 6</span><button type="button" class="tg-btn" data-dir="1" aria-label="Next testimonial"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
             </div>
-            <p class="sub">Real messages from clients I work with. Names hidden.</p>
-            <div class="q-rot" aria-live="polite">
-              <blockquote class="q is-on"><p>“Before this week ends, I just want to commend Sen for job well done. Notice how he interacts with his clients. Professional, kind and assuring.”</p></blockquote>
-              <blockquote class="q"><p>“The way you study your clients and learn their business language. 10 out 10.”</p></blockquote>
-              <blockquote class="q"><p>“Thank you for your help and support with my business. You are an important person on my business team!!”</p></blockquote>
-              <blockquote class="q"><p>“Everyday you come in with things to do which is exactly what I wanted.”</p></blockquote>
-              <blockquote class="q"><p>“Thank you so much!! Your advice and expertise help me so much!!”</p></blockquote>
-              <blockquote class="q"><p>“Yesssss Sen!! You did exactly what I asked.”</p></blockquote>
+            <div class="tstack" aria-roledescription="carousel" aria-label="Client testimonials">
+              <span class="tblob a" aria-hidden="true"></span><span class="tblob b" aria-hidden="true"></span>
+              <div class="tg-deck" aria-live="polite">
+              <figure class="tg" data-i="0" aria-roledescription="slide" aria-label="1 of 6"><blockquote><p>“Before this week ends, I just want to commend Sen for job well done. Notice how he interacts with his clients. Professional, kind and assuring.”</p></blockquote><figcaption><span class="tg-av" aria-hidden="true">SL</span><span class="tg-who"><b>Sabrina L</b><span>HerWay Beauty</span></span></figcaption></figure>
+              <figure class="tg" data-i="1" aria-roledescription="slide" aria-label="2 of 6"><blockquote><p>“The way you study your clients and learn their business language. 10 out 10.”</p></blockquote><figcaption><span class="tg-av" aria-hidden="true">TA</span><span class="tg-who"><b>Tamica A</b><span>Endless Beauty Aesthetics</span></span></figcaption></figure>
+              <figure class="tg" data-i="2" aria-roledescription="slide" aria-label="3 of 6"><blockquote><p>“Thank you for your help and support with my business. You are an important person on my business team!!”</p></blockquote><figcaption><span class="tg-av" aria-hidden="true">SP</span><span class="tg-who"><b>Shatikka P</b><span>Beat by Mookie</span></span></figcaption></figure>
+              <figure class="tg" data-i="3" aria-roledescription="slide" aria-label="4 of 6"><blockquote><p>“Everyday you come in with things to do which is exactly what I wanted.”</p></blockquote><figcaption><span class="tg-av" aria-hidden="true">DB</span><span class="tg-who"><b>Denise B</b><span>King Khloe</span></span></figcaption></figure>
+              <figure class="tg" data-i="4" aria-roledescription="slide" aria-label="5 of 6"><blockquote><p>“Thank you so much!! Your advice and expertise help me so much!!”</p></blockquote><figcaption><span class="tg-av" aria-hidden="true">LD</span><span class="tg-who"><b>Laurie D</b><span>Absolute Beauty by Laurie</span></span></figcaption></figure>
+              <figure class="tg" data-i="5" aria-roledescription="slide" aria-label="6 of 6"><blockquote><p>“Yesssss Sen!! You did exactly what I asked.”</p></blockquote><figcaption><span class="tg-av" aria-hidden="true">DB</span><span class="tg-who"><b>Denise B</b><span>King Khloe</span></span></figcaption></figure>
+              </div>
             </div>
-            <div class="q-foot"><div class="q-dots"><button type="button" class="qd on" aria-label="Show quote 1"></button><button type="button" class="qd" aria-label="Show quote 2"></button><button type="button" class="qd" aria-label="Show quote 3"></button><button type="button" class="qd" aria-label="Show quote 4"></button><button type="button" class="qd" aria-label="Show quote 5"></button><button type="button" class="qd" aria-label="Show quote 6"></button></div><span class="q-src">Client messages · Slack, email &amp; chat</span></div>
             <div class="bubbles" aria-label="More short client replies"><span class="bub">Perfect! Love them all</span><span class="bub">Emails approved! Good work!!</span><span class="bub">Love the reels!!!</span><span class="bub">You fixed it!!</span><span class="bub">It’s finally all paying off!</span><span class="bub">This formula works for email marketing</span></div>
           </section>
 
@@ -629,7 +684,7 @@
 </div>
 
 <!-- Floating chat bubble (swap the text for your avatar image) -->
-<a class="float" href="#contact" aria-label="Message Sen"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg></a>
+<a class="float" href="mailto:sentngc@gmail.com?subject=Project%20inquiry%20from%20your%20portfolio" aria-label="Message Sen"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg></a>
 
 <script>
   // Light / dark toggle, remembered per visitor
@@ -647,15 +702,49 @@
 </script>
 
 <script>
-  // Rotate real client quotes on the Testimonials card
+  // Testimonials: stacked glass panels
   (function () {
-    const qs = [...document.querySelectorAll('.q')], ds = [...document.querySelectorAll('.qd')];
-    if (qs.length < 2) return;
-    let i = 0, timer;
-    function show(n) { qs[i].classList.remove('is-on'); ds[i].classList.remove('on'); i = n; qs[i].classList.add('is-on'); ds[i].classList.add('on'); }
-    function start() { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; clearInterval(timer); timer = setInterval(() => show((i + 1) % qs.length), 6000); }
-    ds.forEach((d, n) => d.addEventListener('click', () => { show(n); start(); }));
-    start();
+    const deck = document.querySelector('.tg-deck');
+    if (!deck) return;
+    const cards = [...deck.querySelectorAll('.tg')], n = cards.length;
+    const count = document.querySelector('.tg-count b');
+    const blobs = document.querySelectorAll('.tblob');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0, timer, busy = false;
+    function layout() {
+      cards.forEach((c, k) => {
+        const p = (k - i + n) % n;
+        if (c.dataset.pos !== 'out' && c.dataset.pos !== 'in') c.dataset.pos = p < 3 ? String(p) : 'back';
+        c.setAttribute('aria-hidden', p === 0 ? 'false' : 'true');
+      });
+      if (count) count.textContent = i + 1;
+      blobs.forEach((b, k) => b.style.transform = `translate(${(i % 3) * (k ? -14 : 18)}px, ${(i % 2) * (k ? 10 : -12)}px) scale(${1 + (i % 2) * .08})`);
+    }
+    function go(dir) {
+      if (busy) return; busy = true;
+      if (dir > 0) {
+        const leaving = cards[i];
+        leaving.dataset.pos = 'out';
+        i = (i + 1) % n; layout();
+        setTimeout(() => { leaving.dataset.pos = 'back'; layout(); busy = false; }, reduce ? 50 : 520);
+      } else {
+        i = (i - 1 + n) % n;
+        const coming = cards[i];
+        coming.dataset.pos = 'in'; layout();
+        coming.offsetWidth;            // commit the start position
+        requestAnimationFrame(() => { coming.dataset.pos = '0'; layout(); setTimeout(() => busy = false, reduce ? 50 : 520); });
+      }
+    }
+    function start() { if (reduce) return; clearInterval(timer); timer = setInterval(() => go(1), 5500); }
+    function stop() { clearInterval(timer); }
+    document.querySelectorAll('.tg-btn').forEach(b => b.addEventListener('click', () => { go(+b.dataset.dir); start(); }));
+    const box = document.querySelector('.tstack');
+    box.addEventListener('mouseenter', stop); box.addEventListener('mouseleave', start);
+    let x0 = null;
+    box.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+    box.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); x0 = null; start(); });
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    layout(); start();
   })();
 </script>
 
