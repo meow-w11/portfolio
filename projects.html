@@ -1803,5 +1803,67 @@
   dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
   dlg.addEventListener('close', () => { pdMedia.replaceChildren(); if (lastOpener) lastOpener.focus(); });
 </script>
+
+<dialog class="ctd" id="ctDialog" aria-labelledby="ctTitle">
+  <div class="ctd-in">
+    <button type="button" class="ctd-x" data-close aria-label="Close">×</button>
+    <p class="ctd-kick">GET IN TOUCH</p>
+    <h2 id="ctTitle">Let’s talk.</h2>
+    <p class="ctd-sub">Tell me what you sell and what you’re aiming for. Pick whatever’s easiest:</p>
+    <div class="ctd-mail"><span id="ctAddr">sentngc@gmail.com</span><button type="button" class="ctd-copy" id="ctCopy">Copy</button></div>
+    <div class="ctd-acts">
+      <a class="ctd-btn primary" id="ctGmail" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11Zm2.2-.3 6.8 5.1 6.8-5.1H5.2Z"/></svg>Write in Gmail</a>
+      <a class="ctd-btn" id="ctApp" href="#">Open my email app</a>
+      <a class="ctd-btn" href="https://www.linkedin.com/in/sentaningco/" target="_blank" rel="noopener">Message me on LinkedIn</a>
+    </div>
+  </div>
+</dialog>
+<style>
+  .ctd { border: 0; padding: 0; border-radius: 22px; width: min(440px, calc(100vw - 32px)); background: var(--white); color: var(--ink); box-shadow: 0 30px 80px rgba(11,27,63,.35); }
+  .ctd::backdrop { background: rgba(11,27,63,.45); backdrop-filter: blur(3px); }
+  .ctd-in { position: relative; padding: 30px 26px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .ctd-x { position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--chip); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+  .ctd-kick { margin: 0; font-size: 11.5px; font-weight: 700; letter-spacing: .12em; color: var(--accent); }
+  .ctd h2 { margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.03em; }
+  .ctd-sub { margin: 0; font-size: 14.5px; color: var(--body); }
+  .ctd-mail { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px; padding: 8px 8px 8px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); font-weight: 700; font-size: 15px; word-break: break-all; }
+  .ctd-copy { flex: none; min-height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: var(--ink); color: var(--bg); font-weight: 700; cursor: pointer; }
+  .ctd-copy.done { background: #0E9F6E; color: #fff; }
+  .ctd-acts { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+  .ctd-btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 999px; font-weight: 700; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); }
+  .ctd-btn:hover { background: var(--ink); color: var(--bg); }
+  .ctd-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .ctd-btn.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+</style>
+<script>
+  // Every email link opens this popup: Gmail compose, mail app, copy address, LinkedIn
+  (function () {
+    const d = document.getElementById('ctDialog'); if (!d) return;
+    const gm = document.getElementById('ctGmail'), app = document.getElementById('ctApp'), copy = document.getElementById('ctCopy');
+    let opener = null;
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="mailto:"]');
+      if (!a || d.contains(a)) return;
+      e.preventDefault();
+      const u = new URL(a.href), to = decodeURIComponent(u.pathname), q = u.searchParams;
+      const su = q.get('subject') || 'Project inquiry from your portfolio', body = q.get('body') || '';
+      gm.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + encodeURIComponent(su) + (body ? '&body=' + encodeURIComponent(body) : '');
+      app.href = a.href;
+      document.getElementById('ctAddr').textContent = to;
+      copy.textContent = 'Copy'; copy.classList.remove('done');
+      opener = a;
+      if (d.open) d.close();
+      d.showModal();
+    });
+    copy.addEventListener('click', async () => {
+      const t = document.getElementById('ctAddr').textContent;
+      try { await navigator.clipboard.writeText(t); }
+      catch (err) { const r = document.createRange(); r.selectNodeContents(document.getElementById('ctAddr')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); try { document.execCommand('copy'); } catch (e2) {} }
+      copy.textContent = 'Copied!'; copy.classList.add('done');
+    });
+    d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-close]')) d.close(); });
+    d.addEventListener('close', () => { if (opener) opener.focus(); });
+  })();
+</script>
 </body>
 </html>
