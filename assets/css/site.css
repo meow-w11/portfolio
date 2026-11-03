@@ -263,3 +263,4 @@ a.sig:hover { color: var(--accent); }
 .ctd-btn:hover { background: var(--ink); color: var(--bg); }
 .ctd-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .ctd-btn.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+html, body, .main { touch-action: manipulation; }
