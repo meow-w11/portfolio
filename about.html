@@ -373,6 +373,38 @@
     @media (max-width: 860px) { .tstack { padding: 28px 14px 4px 10px; } .tg { padding: 18px 18px 14px; } }
     @media (prefers-reduced-motion: reduce) { .tg, .tblob { transition: opacity .2s ease; } }
 
+    /* ---- Navigation on phones: sticky top bar + full-screen menu ---- */
+    .menu-btn { display: none; }
+    .side-menu { display: contents; }
+    @media (max-width: 860px) {
+      .side { position: sticky; top: 0; z-index: 40; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px;
+        padding: 10px 16px; border-bottom: 1px solid var(--line); overflow: visible;
+        background: color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+      .me { flex: 1; min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 10px; align-items: center; text-align: left; }
+      .me .avatar { grid-row: 1 / 3; width: 44px; height: 44px; margin: 0; font-size: 16px; box-shadow: 0 4px 10px rgba(31,91,216,.25); }
+      .me .name { font-size: 16.5px; line-height: 1.2; align-self: end; }
+      .me .handle { font-size: 12.5px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; align-self: start; }
+      .menu-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 14px; border: 0; border-radius: 999px;
+        background: var(--ink); color: var(--bg); font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer; flex: none; }
+      .mb-ico { position: relative; width: 16px; height: 12px; }
+      .mb-ico i { position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px; background: currentColor; transition: transform .25s ease, opacity .2s ease, top .25s ease; }
+      .mb-ico i:nth-child(1) { top: 0; } .mb-ico i:nth-child(2) { top: 5px; } .mb-ico i:nth-child(3) { top: 10px; }
+      .side.nav-open .mb-ico i:nth-child(1) { top: 5px; transform: rotate(45deg); }
+      .side.nav-open .mb-ico i:nth-child(2) { opacity: 0; }
+      .side.nav-open .mb-ico i:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+      .side-menu { display: none; }
+      .side.nav-open { position: fixed; inset: 0; align-content: flex-start; overflow-y: auto; background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+      .side.nav-open .side-menu { display: flex; flex-direction: column; flex-basis: 100%; padding: 4px 0 24px; animation: menuIn .25s ease; }
+      @keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+      .side.nav-open .nav { order: 1; flex-direction: column; overflow: visible; gap: 4px; padding: 10px 0 14px; border-top: 0; border-bottom: 0; }
+      .side.nav-open .nav a, .side.nav-open .nav .wip { min-height: 54px; font-size: 18px; font-weight: 600; padding: 0 16px; gap: 16px; }
+      .side.nav-open .nav .wip em { margin-left: auto; }
+      .side.nav-open .socials { order: 2; justify-content: flex-start; margin: 6px 0 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+      .side.nav-open .side-foot { order: 3; display: flex; padding-top: 0; }
+      html.menu-open, html.menu-open body { overflow: hidden; }
+      html.menu-open .float { display: none; }
+    }
+
     /* ================= Services page ================= */
     .smain { display: flex; flex-direction: column; gap: 28px; overflow-y: auto; padding-bottom: 64px; }
     .eyebrow, .top p.eyebrow { margin: 0 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--accent); }
@@ -648,6 +680,8 @@
       <div class="handle">AI ads &amp; automations · <b>La Union, PH</b></div>
     </div>
 
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="sideMenu"><span class="mb-ico" aria-hidden="true"><i></i><i></i><i></i></span><span class="mb-txt">Menu</span></button>
+    <div class="side-menu" id="sideMenu">
     <div class="socials">
       <a class="icon-btn" href="https://www.linkedin.com/in/sentaningco/" target="_blank" rel="noopener" aria-label="LinkedIn">
         <svg class="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm7 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11Z"/></svg>
@@ -677,6 +711,21 @@
       <span class="bubble" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>
       <span>Open for new projects<br>© 2026 Sen Taningco</span>
     </div>
+    </div>
+    <script>
+      // Phones: the sidebar becomes a top bar with a Menu button
+      (function () {
+        const side = document.currentScript.closest('aside'), btn = side.querySelector('.menu-btn'), txt = btn.querySelector('.mb-txt');
+        function set(open) {
+          side.classList.toggle('nav-open', open); document.documentElement.classList.toggle('menu-open', open);
+          btn.setAttribute('aria-expanded', open); txt.textContent = open ? 'Close' : 'Menu';
+        }
+        btn.addEventListener('click', () => set(!side.classList.contains('nav-open')));
+        side.querySelectorAll('.side-menu a').forEach(a => a.addEventListener('click', () => set(false)));
+        addEventListener('keydown', e => { if (e.key === 'Escape' && side.classList.contains('nav-open')) { set(false); btn.focus(); } });
+        matchMedia('(min-width: 861px)').addEventListener('change', e => { if (e.matches) set(false); });
+      })();
+    </script>
   </aside>
 
   <!-- ================= MAIN ================= -->
