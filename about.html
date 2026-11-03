@@ -492,11 +492,11 @@
     .way h3 { margin: 12px 0 4px; font-size: 17px; font-weight: 800; letter-spacing: -0.015em; }
     .way p { margin: 0; font-size: 13.5px; color: var(--body); }
 
-    .a-quote { margin: 0; padding: 26px 30px; border-radius: 22px; background: var(--white); text-align: center; }
-    .a-quote blockquote { margin: 0; }
-    .a-quote p { margin: 0 auto; max-width: 760px; font-size: clamp(19px, 1.8vw, 26px); font-weight: 800; line-height: 1.3; letter-spacing: -0.02em; color: var(--ink); }
-    .a-quote figcaption { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 14px; color: var(--muted); }
-    .a-quote figcaption b { color: var(--ink); }
+    .a-brands { padding: 22px 24px 24px; border-radius: 22px; background: var(--white); }
+    .a-brands .eyebrow { margin-bottom: 14px; }
+    .brand-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .brand-row li { padding: 10px 18px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);
+      font-size: clamp(14px, 1.05vw, 16.5px); font-weight: 800; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; }
     .tg-av { width: 36px; height: 36px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 12.5px; font-weight: 800; color: #fff; background: radial-gradient(circle at 30% 25%, #4F78D9, #1F5BD8 60%, #0B1B3F); }
 
 
@@ -561,7 +561,8 @@
       .tl-item.now .tl-dot { left: -18px; top: 16px; }
       .tl-item.now .tl-year { margin-top: 0; }
       .ways { grid-template-columns: minmax(0, 1fr); }
-      .a-quote { padding: 22px 18px; }
+      .a-brands { padding: 18px 14px; }
+      .brand-row li { padding: 8px 14px; }
     }
   </style>
 </head>
@@ -762,10 +763,10 @@
       </div>
     </section>
 
-    <figure class="a-quote">
-      <blockquote><p>“The way you study your clients and learn their business language. 10 out 10.”</p></blockquote>
-      <figcaption><span class="tg-av" aria-hidden="true">TA</span><span><b>Tamica A</b> · Endless Beauty Aesthetics</span></figcaption>
-    </figure>
+    <section class="a-brands" aria-labelledby="b-title">
+      <p class="eyebrow center" id="b-title">BRANDS I’VE WORKED WITH</p>
+      <ul class="brand-row"><li>HerWay Beauty</li><li>Endless Beauty Aesthetics</li><li>Absolute Beauty by Laurie</li><li>King Khloe</li><li>Beat by Mookie</li><li>Kavelen</li><li>KELSO</li></ul>
+    </section>
 
     <section class="cta-band">
       <div>
