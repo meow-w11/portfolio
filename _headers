@@ -11,3 +11,6 @@
 
 /videos/*
   Cache-Control: public, max-age=604800
+
+/vzn-pitch.html
+  X-Robots-Tag: noindex, nofollow, noarchive
