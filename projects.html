@@ -145,6 +145,20 @@
     .pcard.wide .m-squares { flex: 1.6 1 0; height: auto; min-height: 0; }
     .m-squares .sq { aspect-ratio: 1; border-radius: 10px; background-size: cover; background-position: center; box-shadow: 0 6px 16px rgba(11,27,63,.14); transition: transform .3s ease; }
     .pcard:hover .m-squares .sq:nth-child(odd) { transform: translateY(-3px); }
+    .img-gallery.funnel { row-gap: 30px; padding-top: 30px; }
+    .funnel .fn-fig { position: relative; }
+    .fn-tag { position: absolute; top: -13px; left: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 10px; border-radius: 999px; overflow: hidden; isolation: isolate;
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; cursor: default; outline: none;
+      background: rgba(11,27,63,.55); -webkit-backdrop-filter: blur(10px) saturate(1.4); backdrop-filter: blur(10px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,.55); box-shadow: 0 4px 14px rgba(11,27,63,.22); text-shadow: 0 1px 2px rgba(0,0,0,.35);
+      transition: box-shadow .35s ease, border-color .35s ease, transform .35s ease; }
+    .fn-tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--fc); box-shadow: 0 0 0 2px rgba(255,255,255,.55); }
+    .fn-top { --fc: #4F8BFF; } .fn-mid { --fc: #F5A623; } .fn-bot { --fc: #22C55E; }
+    .fn-tag::after { content: ""; position: absolute; inset: -2px; z-index: -1; transform: translateX(-130%) skewX(-20deg);
+      background: linear-gradient(90deg, transparent 20%, rgba(255,255,255,.75) 50%, transparent 80%); }
+    .fn-tag:hover, .fn-tag:focus-visible, .fn-tag:active { border-color: #fff; transform: translateY(-1px); box-shadow: 0 0 0 1px var(--fc), 0 0 18px var(--fc), 0 4px 14px rgba(0,0,0,.2); }
+    .fn-tag:hover::after, .fn-tag:focus-visible::after, .fn-tag:active::after { transform: translateX(130%) skewX(-20deg); transition: transform .8s ease; }
+    @media (prefers-reduced-motion: reduce) { .fn-tag::after { display: none; } }
     .img-gallery.squares { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
     .img-gallery.squares img { aspect-ratio: 1; object-fit: cover; }
     .m-dg { gap: 18px; padding: 22px 26px; background: linear-gradient(180deg, #EAF1FE, #F4F7FD); }
@@ -438,19 +452,19 @@
           <button type="button" class="open">See all 12 samples <span aria-hidden="true">→</span></button>
         </div>
         <template class="detail">
-          <div class="img-gallery">
-            <figure><img src="assets/img/8c1213851275.webp" alt="VZN Frames sample ad: Quietly exceptional." loading="lazy" decoding="async"><figcaption>“Quietly exceptional.” · Product hero</figcaption></figure>
-            <figure><img src="assets/img/15f1a2499183.webp" alt="VZN Frames sample ad: Considered to the millimetre." loading="lazy" decoding="async"><figcaption>“Considered to the millimetre.” · Fit guide</figcaption></figure>
-            <figure><img src="assets/img/d7d1aedb2ec7.webp" alt="VZN Frames sample ad: Some men simply know." loading="lazy" decoding="async"><figcaption>“Some men simply know.” · On model</figcaption></figure>
-            <figure><img src="assets/img/15dd0af3f270.webp" alt="VZN Frames sample ad: See it as it should be." loading="lazy" decoding="async"><figcaption>“See it as it should be.” · Glare test</figcaption></figure>
-            <figure><img src="assets/img/f48b9f292655.webp" alt="VZN Frames sample ad: You’re paying for the logo. Or the lens." loading="lazy" decoding="async"><figcaption>“You’re paying for the logo. Or the lens.” · Comparison</figcaption></figure>
-            <figure><img src="assets/img/33a4335ad3f1.webp" alt="VZN Frames sample ad: Spare him another tie." loading="lazy" decoding="async"><figcaption>“Spare him another tie.” · Christmas gift</figcaption></figure>
-            <figure><img src="assets/img/c2cec2512a50.webp" alt="VZN Frames sample ad: Winter, well worn." loading="lazy" decoding="async"><figcaption>“Winter, well worn.” · On model</figcaption></figure>
-            <figure><img src="assets/img/b141097d711d.webp" alt="VZN Frames sample ad: The sun sits lower in December." loading="lazy" decoding="async"><figcaption>“The sun sits lower in December.” · Winter driving</figcaption></figure>
-            <figure><img src="assets/img/8643694c9d41.webp" alt="VZN Frames sample ad: The one he won’t return." loading="lazy" decoding="async"><figcaption>“The one he won’t return.” · Christmas gift</figcaption></figure>
-            <figure><img src="assets/img/a1c7f078a1ea.webp" alt="VZN Frames sample ad: Zoom in on these finely tuned frames." loading="lazy" decoding="async"><figcaption>“Zoom in on these finely tuned frames.” · Story ad</figcaption></figure>
-            <figure><img src="assets/img/a4b1419c380c.webp" alt="VZN Frames sample ad: Luxury for the holidays" loading="lazy" decoding="async"><figcaption>Luxury for the holidays · Christmas still</figcaption></figure>
-            <figure><img src="assets/img/f3035c7b6a14.webp" alt="VZN Frames sample ad: VZN Frames, polarised" loading="lazy" decoding="async"><figcaption>VZN Frames, polarised · Christmas still</figcaption></figure>
+          <div class="img-gallery funnel">
+            <figure class="fn-fig"><span class="fn-tag fn-top" tabindex="0"><i aria-hidden="true"></i>Top of funnel</span><img src="assets/img/d7d1aedb2ec7.webp" alt="VZN Frames sample ad: Some men simply know." loading="lazy" decoding="async"><figcaption>“Some men simply know.” · On model</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-top" tabindex="0"><i aria-hidden="true"></i>Top of funnel</span><img src="assets/img/c2cec2512a50.webp" alt="VZN Frames sample ad: Winter, well worn." loading="lazy" decoding="async"><figcaption>“Winter, well worn.” · On model</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-top" tabindex="0"><i aria-hidden="true"></i>Top of funnel</span><img src="assets/img/b141097d711d.webp" alt="VZN Frames sample ad: The sun sits lower in December." loading="lazy" decoding="async"><figcaption>“The sun sits lower in December.” · Winter driving</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-top" tabindex="0"><i aria-hidden="true"></i>Top of funnel</span><img src="assets/img/a4b1419c380c.webp" alt="VZN Frames sample ad: Luxury for the holidays" loading="lazy" decoding="async"><figcaption>Luxury for the holidays · Christmas still</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-top" tabindex="0"><i aria-hidden="true"></i>Top of funnel</span><img src="assets/img/f3035c7b6a14.webp" alt="VZN Frames sample ad: VZN Frames, polarised" loading="lazy" decoding="async"><figcaption>VZN Frames, polarised · Christmas still</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-mid" tabindex="0"><i aria-hidden="true"></i>Middle of funnel</span><img src="assets/img/15dd0af3f270.webp" alt="VZN Frames sample ad: See it as it should be." loading="lazy" decoding="async"><figcaption>“See it as it should be.” · Glare test</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-mid" tabindex="0"><i aria-hidden="true"></i>Middle of funnel</span><img src="assets/img/8c1213851275.webp" alt="VZN Frames sample ad: Quietly exceptional." loading="lazy" decoding="async"><figcaption>“Quietly exceptional.” · Product hero</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-mid" tabindex="0"><i aria-hidden="true"></i>Middle of funnel</span><img src="assets/img/33a4335ad3f1.webp" alt="VZN Frames sample ad: Spare him another tie." loading="lazy" decoding="async"><figcaption>“Spare him another tie.” · Christmas gift</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-mid" tabindex="0"><i aria-hidden="true"></i>Middle of funnel</span><img src="assets/img/8643694c9d41.webp" alt="VZN Frames sample ad: The one he won’t return." loading="lazy" decoding="async"><figcaption>“The one he won’t return.” · Christmas gift</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-bot" tabindex="0"><i aria-hidden="true"></i>Bottom of funnel</span><img src="assets/img/f48b9f292655.webp" alt="VZN Frames sample ad: You’re paying for the logo. Or the lens." loading="lazy" decoding="async"><figcaption>“You’re paying for the logo. Or the lens.” · Comparison</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-bot" tabindex="0"><i aria-hidden="true"></i>Bottom of funnel</span><img src="assets/img/15f1a2499183.webp" alt="VZN Frames sample ad: Considered to the millimetre." loading="lazy" decoding="async"><figcaption>“Considered to the millimetre.” · Fit guide</figcaption></figure>
+            <figure class="fn-fig"><span class="fn-tag fn-bot" tabindex="0"><i aria-hidden="true"></i>Bottom of funnel</span><img src="assets/img/a1c7f078a1ea.webp" alt="VZN Frames sample ad: Zoom in on these finely tuned frames." loading="lazy" decoding="async"><figcaption>“Zoom in on these finely tuned frames.” · Story ad</figcaption></figure>
           </div>
           <h4>The brief</h4>
           <p>A set of sample images to show how I’d approach VZN Frames’ quiet‑luxury look and voice, built around the St Barts⁺ polarised frames in the run‑up to Christmas.</p>
@@ -460,6 +474,7 @@
             <li>Product heroes true to each frame and lens: the olive Safari, the grey Sterling and the blue Azure.</li>
             <li>Ads that sell the lens, not just the look: a glare test, a fit guide to the millimetre and a comparison with designer pairs.</li>
             <li>On‑model scenes for a 45+ buyer, from a Mediterranean terrace to a winter Christmas market.</li>
+            <li>Planned across the funnel: top‑of‑funnel brand and lifestyle ads, middle‑of‑funnel reasons to choose VZN, and bottom‑of‑funnel ads that answer the last doubts before buying.</li>
             <li>Square, 4:5 and 9:16 sizes, ready for feed and stories.</li>
           </ul>
         </template>
