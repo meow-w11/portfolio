@@ -107,6 +107,7 @@
     :root[data-theme="dark"] .ugc-gallery { background: linear-gradient(180deg, #19223A, #151B28); }
     .ugc-item { margin: 0; display: flex; flex-direction: column; gap: 8px; }
     .ugc-item video { width: 100%; aspect-ratio: 9 / 16; border-radius: 14px; background: #0F1218; object-fit: cover; box-shadow: 0 0 0 3px #fff, 0 8px 20px rgba(11,27,63,.18); }
+    .ugc-item.long video { aspect-ratio: 4 / 5; object-fit: contain; }
     .ugc-item figcaption { font-size: 12.5px; font-weight: 700; color: #0B1B3F; line-height: 1.3; }
     :root[data-theme="dark"] .ugc-item figcaption { color: var(--ink); }
     .ugc-item figcaption span { display: block; font-weight: 500; color: var(--muted); }
@@ -421,7 +422,6 @@
       <div class="tabs" role="group" aria-label="Filter projects">
         <button type="button" class="ftab" data-filter="all" aria-pressed="true">All</button>
         <button type="button" class="ftab" data-filter="ugc" aria-pressed="false">AI UGC</button>
-        <button type="button" class="ftab" data-filter="creative" aria-pressed="false">Ad Creative</button>
         <button type="button" class="ftab" data-filter="auto" aria-pressed="false">Automations</button>
         <button type="button" class="ftab" data-filter="web" aria-pressed="false">Web &amp; Email</button>
         <button type="button" class="ftab" data-filter="design" aria-pressed="false">Design &amp; Social</button>
@@ -430,7 +430,7 @@
 
     <div class="pgrid" id="pgrid">
 
-      <article class="pcard wide" data-cat="creative">
+      <article class="pcard wide" data-cat="ugc">
         <div class="media m-acc">
           <div class="acc">
             <div class="acc-i" style="background-image: url(assets/img/b68fe34f67fe.webp)" aria-hidden="true"><span class="acc-cap">“Some men simply know.”</span></div>
@@ -445,7 +445,7 @@
         </div>
         <div class="pbody">
           <div class="ptools"><span class="ttile" style="--c:#10A37F" data-i="C" title="ChatGPT" role="img" aria-label="ChatGPT"><svg aria-hidden="true"><use href="#tg-openai-icon"/></svg></span><span class="ttile" style="--c:#D97757" data-i="C" title="Claude" role="img" aria-label="Claude"><svg aria-hidden="true"><use href="#tg-claude"/></svg></span><span class="ttile" style="--c:#00C4CC" data-i="C" title="Canva" role="img" aria-label="Canva"><svg aria-hidden="true"><use href="#tg-canva"/></svg></span></div>
-          <div class="pmeta"><span class="cat">Ad Creative</span><span>VZN Frames · Eyewear</span><span class="badge-feat">New</span></div>
+          <div class="pmeta"><span class="cat">AI UGC</span><span>VZN Frames · Eyewear</span><span class="badge-feat">New</span></div>
           <h3>Sample images for VZN Frames</h3>
           <p>Sample ads for the St Barts⁺ polarised range: Christmas gift stills, product heroes, a fit guide and a glare test, written in British English for the man who buys once and buys well.</p>
           <div class="ptags"><span class="spill" style="--c:#7C3AED">AI models</span><span class="spill" style="--c:#E8890C">Ad design</span><span class="spill" style="--c:#0E9F6E">Copywriting</span></div>
@@ -479,7 +479,7 @@
           </ul>
         </template>
       </article>
-      <article class="pcard wide" data-cat="ugc creative">
+      <article class="pcard wide" data-cat="ugc">
         <div class="media m-acc">
           <div class="acc">
             <div class="acc-i" style="background-image: url(assets/img/1351b44fb525.webp)" aria-hidden="true"><span class="acc-cap">“This is your sign to shop”</span></div>
@@ -526,7 +526,7 @@
           </ul>
         </template>
       </article>
-      <article class="pcard wide" data-cat="ugc creative">
+      <article class="pcard wide" data-cat="ugc">
         <div class="media m-acc">
           <div class="acc">
             <div class="acc-i" style="background-image: url(assets/img/c97de411760e.webp)" aria-hidden="true"><span class="acc-cap">Kelso One · “The fit wasn’t complete”</span></div>
@@ -598,9 +598,9 @@
           <div class="ptools"><span class="ttile" style="--c:#1A1A1A" data-i="H" title="Higgsfield" role="img" aria-label="Higgsfield"><img src="https://www.google.com/s2/favicons?domain=higgsfield.ai&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span><span class="ttile" style="--c:#1A1A1A" data-i="C" title="CapCut" role="img" aria-label="CapCut"><img src="https://www.google.com/s2/favicons?domain=capcut.com&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span></div>
           <div class="pmeta"><span class="cat">AI UGC</span><span>Kavelen · Hair growth serum</span></div>
           <h3>UGC ads that were never filmed</h3>
-          <p>Kavelen sent the scripts. I made everything else from scratch: four AI creators, every scene and every edit, ready to run as ads.</p>
+          <p>Kavelen sent the scripts. I made everything else from scratch: AI creators, every scene and every edit, from short UGC clips to long‑form video ads.</p>
           <div class="ptags"></div>
-          <button type="button" class="open">Watch the ads <span aria-hidden="true">→</span></button>
+          <button type="button" class="open">Watch all 6 ads <span aria-hidden="true">→</span></button>
         </div>
         <template class="detail">
           <div class="ugc-gallery">
@@ -608,6 +608,8 @@
             <figure class="ugc-item"><video src="videos/kavelen-2.mp4" poster="videos/kavelen-2.jpg" controls playsinline preload="none"></video><figcaption>Car selfie UGC<span>52s</span></figcaption></figure>
             <figure class="ugc-item"><video src="videos/kavelen-3.mp4" poster="videos/kavelen-3.jpg" controls playsinline preload="none"></video><figcaption>Story text ad · version A<span>83s</span></figcaption></figure>
             <figure class="ugc-item"><video src="videos/kavelen-4.mp4" poster="videos/kavelen-4.jpg" controls playsinline preload="none"></video><figcaption>Story text ad · version B<span>83s</span></figcaption></figure>
+            <figure class="ugc-item long"><video src="videos/kavelen-5.mp4" poster="videos/kavelen-5.jpg" controls playsinline preload="none"></video><figcaption>Long‑form ad · “I lost 50% of my hair” hook<span>4:26</span></figcaption></figure>
+            <figure class="ugc-item long"><video src="videos/kavelen-6.mp4" poster="videos/kavelen-6.jpg" controls playsinline preload="none"></video><figcaption>Long‑form ad · hair follicle hook<span>4:27</span></figcaption></figure>
           </div>
           <h4>The brief</h4>
           <p>Kavelen, a hair growth serum brand, had the scripts but no creators, no footage and no edits. They needed finished ads they could run.</p>
@@ -616,6 +618,7 @@
             <li>Turned each script into a different format: a podcast clip, a selfie video filmed in a car, and a story told in on‑screen text.</li>
             <li>Created four distinct AI creators in Higgsfield, each matched to the brand's audience.</li>
             <li>Edited every ad in CapCut with captions, pacing and hooks built for sound‑off scrolling.</li>
+            <li>Cut two 4½‑minute long‑form ads in 4:5, telling the same story with two different opening hooks to test against each other.</li>
           </ul>
           <h4>Result</h4>
           <p class="res">Kavelen ran these as their main ads for bringing in new customers.</p>
@@ -625,7 +628,7 @@
 
 
 
-      <article class="pcard" data-cat="creative">
+      <article class="pcard" data-cat="design">
         <div class="media m-pack">
           <div class="pack-hero" style="background-image: url(assets/img/d3ca071e8bf8.webp)" role="img" aria-label="Mockup of the Kavelen box and roller bottle"></div>
           <div class="pack-flat" style="background-image: url(assets/img/eace249ee28c.webp)" role="img" aria-label="Flat print-ready Kavelen label"></div>
