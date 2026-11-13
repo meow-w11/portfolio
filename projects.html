@@ -100,16 +100,17 @@
     .m-system { --slot: .42s; --cyc: 4.2s; }
     .m-system .sys-row > * { --t: calc(var(--s) * var(--slot) + var(--row) * 2.1s); }
     .m-system .node { position: relative; animation: nodePing var(--cyc) ease-out var(--t) infinite; }
-    .m-system .link::before { content: ""; position: absolute; z-index: 1; top: 50%; left: 0; width: 9px; height: 9px; border-radius: 50%; background: #1F5BD8;
-      box-shadow: 0 0 0 3px rgba(31,91,216,.18), 0 0 12px #4F78D9; transform: translate(-50%, -50%); opacity: 0; animation: packetX var(--cyc) linear var(--t) infinite; }
+    .m-system .link::before { content: ""; position: absolute; z-index: 1; top: calc(50% - 12px); left: -12px; width: 100%; height: 24px; pointer-events: none;
+      background: radial-gradient(circle at 12px 50%, #1F5BD8 0 4.5px, rgba(31,91,216,.22) 5px 7.5px, rgba(79,120,217,.18) 8px, transparent 12px);
+      opacity: 0; will-change: transform, opacity; animation: packetX var(--cyc) linear var(--t) infinite; }
     .m-system .node.hot { overflow: hidden; }
     .m-system .node.hot::after { content: ""; position: absolute; inset: 0; transform: translateX(-120%) skewX(-20deg);
       background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,.35) 50%, transparent 75%); animation: hotSheen var(--cyc) ease-in-out var(--t) infinite; }
-    @keyframes packetX { 0% { left: 0; opacity: 0; } 2% { opacity: 1; } 9% { left: 100%; opacity: 1; } 11%, 100% { left: 100%; opacity: 0; } }
-    @keyframes packetY { 0% { top: 0; opacity: 0; } 2% { opacity: 1; } 9% { top: 100%; opacity: 1; } 11%, 100% { top: 100%; opacity: 0; } }
+    @keyframes packetX { 0% { transform: translateX(0); opacity: 0; } 2% { opacity: 1; } 9% { transform: translateX(100%); opacity: 1; } 11%, 100% { transform: translateX(100%); opacity: 0; } }
+    @keyframes packetY { 0% { transform: translateY(0); opacity: 0; } 2% { opacity: 1; } 9% { transform: translateY(100%); opacity: 1; } 11%, 100% { transform: translateY(100%); opacity: 0; } }
     @keyframes nodePing { 0% { box-shadow: var(--shadow), 0 0 0 0 rgba(31,91,216,.45); transform: translateY(-1px); } 14% { box-shadow: var(--shadow), 0 0 0 9px rgba(31,91,216,0); transform: none; } 100% { box-shadow: var(--shadow), 0 0 0 0 rgba(31,91,216,0); } }
     @keyframes hotSheen { 0% { transform: translateX(-120%) skewX(-20deg); } 16%, 100% { transform: translateX(120%) skewX(-20deg); } }
-    @media (max-width: 860px) { .m-system .link::before { left: 50%; top: 0; animation-name: packetY; } }
+    @media (max-width: 860px) { .m-system .link::before { left: calc(50% - 12px); top: -12px; width: 24px; height: 100%; background: radial-gradient(circle at 50% 12px, #1F5BD8 0 4.5px, rgba(31,91,216,.22) 5px 7.5px, rgba(79,120,217,.18) 8px, transparent 12px); animation-name: packetY; } }
     @media (prefers-reduced-motion: reduce) { .m-system .node, .m-system .link::before, .m-system .node.hot::after { animation: none; } }
     .m-system { flex-direction: column; gap: 18px; padding: 26px 28px; }
     .sys-row { display: flex; align-items: center; width: 100%; }
@@ -288,6 +289,7 @@
       .img-gallery.squares { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .img-gallery { grid-template-columns: minmax(0, 1fr); padding: 16px; }
       .sys-row { flex-direction: column; align-items: stretch; }
+      .sys-row .node { flex: none; }
       .sys-row .link { flex: 0 0 16px; width: 2px; height: 16px; align-self: center; }
       .sys-row .link::after { right: -4px; top: auto; bottom: -1px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid #8FA9E8; border-bottom: 0; }
       .pstats strong { font-size: 19px; }
@@ -630,12 +632,12 @@
       </article>
       <article class="pcard wide" data-cat="ugc">
         <div class="media m-reel six">
-          <div class="phone"><video class="pv" src="videos/kavelen-1-preview.mp4" poster="videos/kavelen-1.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Podcast UGC preview"></video></div>
-          <div class="phone"><video class="pv" src="videos/kavelen-2-preview.mp4" poster="videos/kavelen-2.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Car selfie UGC preview"></video></div>
-          <div class="phone"><video class="pv" src="videos/kavelen-3-preview.mp4" poster="videos/kavelen-3.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Story text ad · version A preview"></video></div>
-          <div class="phone"><video class="pv" src="videos/kavelen-4-preview.mp4" poster="videos/kavelen-4.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Story text ad · version B preview"></video></div>
-          <div class="phone fit"><video class="pv" src="videos/kavelen-5-preview.mp4" poster="videos/kavelen-5.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Long-form ad preview"></video></div>
-          <div class="phone fit"><video class="pv" src="videos/kavelen-6-preview.mp4" poster="videos/kavelen-6.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Long-form ad preview, second hook"></video></div>
+          <div class="phone"><video class="pv" src="videos/kavelen-1-preview.mp4" poster="videos/kavelen-1.jpg" muted loop playsinline preload="none" aria-label="Podcast UGC preview"></video></div>
+          <div class="phone"><video class="pv" src="videos/kavelen-2-preview.mp4" poster="videos/kavelen-2.jpg" muted loop playsinline preload="none" aria-label="Car selfie UGC preview"></video></div>
+          <div class="phone"><video class="pv" src="videos/kavelen-3-preview.mp4" poster="videos/kavelen-3.jpg" muted loop playsinline preload="none" aria-label="Story text ad · version A preview"></video></div>
+          <div class="phone"><video class="pv" src="videos/kavelen-4-preview.mp4" poster="videos/kavelen-4.jpg" muted loop playsinline preload="none" aria-label="Story text ad · version B preview"></video></div>
+          <div class="phone fit"><video class="pv" src="videos/kavelen-5-preview.mp4" poster="videos/kavelen-5.jpg" muted loop playsinline preload="none" aria-label="Long-form ad preview"></video></div>
+          <div class="phone fit"><video class="pv" src="videos/kavelen-6-preview.mp4" poster="videos/kavelen-6.jpg" muted loop playsinline preload="none" aria-label="Long-form ad preview, second hook"></video></div>
         </div>
         <div class="pbody">
           <div class="ptools"><span class="ttile" style="--c:#1A1A1A" data-i="H" title="Higgsfield" role="img" aria-label="Higgsfield"><img src="https://www.google.com/s2/favicons?domain=higgsfield.ai&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span><span class="ttile" style="--c:#1A1A1A" data-i="C" title="CapCut" role="img" aria-label="CapCut"><img src="https://www.google.com/s2/favicons?domain=capcut.com&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span></div>
@@ -960,14 +962,14 @@
 
       <article class="pcard wide" data-cat="design">
         <div class="media m-dg">
-          <div class="phone dg-phone"><video class="pv" src="videos/dg-reel-1.mp4" poster="assets/img/2c19ae27f76b.webp" muted loop playsinline autoplay preload="metadata" aria-label="Animated Story: Why optimize your Merchant Center"></video></div>
+          <div class="phone dg-phone"><video class="pv" src="videos/dg-reel-1.mp4" poster="assets/img/2c19ae27f76b.webp" muted loop playsinline preload="none" aria-label="Animated Story: Why optimize your Merchant Center"></video></div>
           <div class="dg-stack" aria-hidden="true">
             <div class="sq" style="background-image: url(assets/img/cabdbe0313c8.webp)"></div>
             <div class="sq" style="background-image: url(assets/img/8b4b2b598766.webp)"></div>
             <div class="sq" style="background-image: url(assets/img/0a76deb17c67.webp)"></div>
             <div class="sq" style="background-image: url(assets/img/bbf2fa56f491.webp)"></div>
           </div>
-          <div class="phone dg-phone"><video class="pv" src="videos/dg-reel-2.mp4" poster="assets/img/941f7cdb685e.webp" muted loop playsinline autoplay preload="metadata" aria-label="Animated Story: Rescale with Google Ads"></video></div>
+          <div class="phone dg-phone"><video class="pv" src="videos/dg-reel-2.mp4" poster="assets/img/941f7cdb685e.webp" muted loop playsinline preload="none" aria-label="Animated Story: Rescale with Google Ads"></video></div>
         </div>
         <div class="pbody">
           <div class="ptools"><span class="ttile" style="--c:#00C4CC" data-i="C" title="Canva" role="img" aria-label="Canva"><svg aria-hidden="true"><use href="#tg-canva"/></svg></span></div>
@@ -1258,7 +1260,7 @@
   if (!reduce && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause(); }), { threshold: 0.2 });
     pvs.forEach(v => io.observe(v));
-  }
+  } else if (!reduce) pvs.forEach(v => v.play().catch(() => {}));
 
   // ----- Accordion galleries: first strip open; hover, focus or tap opens another
   function openStrip(el) {
