@@ -46,7 +46,10 @@
     .m-reel .phone:nth-child(even) { transform: translateY(10px); }
     .m-app .phone img { object-position: top; }
     .app-shots img { object-fit: cover; object-position: top; }
-    .phone.mail-ico { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #C2417A; font-weight: 700; font-size: 12px; }
+    .phone.mail-shot { padding: 0; }
+    .phone.mail-shot .scrollshot { width: 100%; height: 100%; transition-duration: 14s; }
+    .email-scroll { max-height: 560px; overflow-y: auto; border-radius: 10px; box-shadow: 0 8px 20px rgba(11,27,63,.15); background: #fff; }
+    .email-scroll img { box-shadow: none !important; border-radius: 0 !important; }
     .m-flow { gap: 0; padding: 18px; background: radial-gradient(#C9D3EA 1px, transparent 1px) 0 0 / 14px 14px, #F2F5FC; }
     .node { flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 8px; text-align: center; font-size: 12px; font-weight: 700; color: #0B1B3F; box-shadow: var(--shadow); }
     .node.hot { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -77,6 +80,20 @@
     .pd-text ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
     .pd-text .res { font-weight: 700; color: var(--ink); background: var(--accent-soft); border-radius: 12px; padding: 10px 14px; }
     .pd-close { position: absolute; top: 12px; right: 12px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,.92); color: #0B1B3F; cursor: pointer; display: grid; place-items: center; box-shadow: var(--shadow); }
+    .m-system { --slot: .42s; --cyc: 4.2s; }
+    .m-system .sys-row > * { --t: calc(var(--s) * var(--slot) + var(--row) * 2.1s); }
+    .m-system .node { position: relative; animation: nodePing var(--cyc) ease-out var(--t) infinite; }
+    .m-system .link::before { content: ""; position: absolute; z-index: 1; top: 50%; left: 0; width: 9px; height: 9px; border-radius: 50%; background: #1F5BD8;
+      box-shadow: 0 0 0 3px rgba(31,91,216,.18), 0 0 12px #4F78D9; transform: translate(-50%, -50%); opacity: 0; animation: packetX var(--cyc) linear var(--t) infinite; }
+    .m-system .node.hot { overflow: hidden; }
+    .m-system .node.hot::after { content: ""; position: absolute; inset: 0; transform: translateX(-120%) skewX(-20deg);
+      background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,.35) 50%, transparent 75%); animation: hotSheen var(--cyc) ease-in-out var(--t) infinite; }
+    @keyframes packetX { 0% { left: 0; opacity: 0; } 2% { opacity: 1; } 9% { left: 100%; opacity: 1; } 11%, 100% { left: 100%; opacity: 0; } }
+    @keyframes packetY { 0% { top: 0; opacity: 0; } 2% { opacity: 1; } 9% { top: 100%; opacity: 1; } 11%, 100% { top: 100%; opacity: 0; } }
+    @keyframes nodePing { 0% { box-shadow: var(--shadow), 0 0 0 0 rgba(31,91,216,.45); transform: translateY(-1px); } 14% { box-shadow: var(--shadow), 0 0 0 9px rgba(31,91,216,0); transform: none; } 100% { box-shadow: var(--shadow), 0 0 0 0 rgba(31,91,216,0); } }
+    @keyframes hotSheen { 0% { transform: translateX(-120%) skewX(-20deg); } 16%, 100% { transform: translateX(120%) skewX(-20deg); } }
+    @media (max-width: 860px) { .m-system .link::before { left: 50%; top: 0; animation-name: packetY; } }
+    @media (prefers-reduced-motion: reduce) { .m-system .node, .m-system .link::before, .m-system .node.hot::after { animation: none; } }
     .m-system { flex-direction: column; gap: 18px; padding: 26px 28px; }
     .sys-row { display: flex; align-items: center; width: 100%; }
     .sys-row .node { padding: 12px 8px; }
@@ -659,16 +676,16 @@
 
       <article class="pcard wide" data-cat="auto">
         <div class="media m-flow m-system">
-          <div class="sys-row">
-            <div class="node">Course bought<small>Wix</small></div><div class="link" aria-hidden="true"></div>
-            <div class="node">Enrollment form<small>Google Forms</small></div><div class="link" aria-hidden="true"></div>
-            <div class="node hot">Make.com<small>4‑path router</small></div><div class="link" aria-hidden="true"></div>
-            <div class="node">Folder, packet, email<small>Drive · Autocrat · Gmail</small></div>
+          <div class="sys-row" style="--row:0">
+            <div style="--s:0" class="node">Course bought<small>Wix</small></div><div style="--s:1" class="link" aria-hidden="true"></div>
+            <div style="--s:2" class="node">Enrollment form<small>Google Forms</small></div><div style="--s:3" class="link" aria-hidden="true"></div>
+            <div style="--s:4" class="node hot">Make.com<small>4‑path router</small></div><div style="--s:5" class="link" aria-hidden="true"></div>
+            <div style="--s:6" class="node">Folder, packet, email<small>Drive · Autocrat · Gmail</small></div>
           </div>
-          <div class="sys-row">
-            <div class="node">Document upload<small>Onboarding portal</small></div><div class="link" aria-hidden="true"></div>
-            <div class="node hot">Make.com<small>Rename &amp; route</small></div><div class="link" aria-hidden="true"></div>
-            <div class="node">Filed to student folder<small>Google Drive</small></div>
+          <div class="sys-row" style="--row:1">
+            <div style="--s:0" class="node">Document upload<small>Onboarding portal</small></div><div style="--s:1" class="link" aria-hidden="true"></div>
+            <div style="--s:2" class="node hot">Make.com<small>Rename &amp; route</small></div><div style="--s:3" class="link" aria-hidden="true"></div>
+            <div style="--s:4" class="node">Filed to student folder<small>Google Drive</small></div>
           </div>
         </div>
         <div class="pbody">
@@ -780,24 +797,61 @@
           </ul>
         </template>
       </article>
-
-      <article class="pcard" data-cat="web">
-        <div class="media m-phone tint-rose"><div class="phone light mail-ico"><svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg><span>Email + SMS</span></div></div>
+      <article class="pcard wide" data-cat="web">
+        <div class="media m-site">
+          <div class="site-desk">
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="url">absolutebeautybylaurie.com</span></div>
+            <div class="scrollshot" style="background-image: url(assets/img/bc6d0b1cc967.webp)" role="img" aria-label="Full-page screenshot of the Absolute Beauty by Laurie homepage"></div>
+          </div>
+        </div>
         <div class="pbody">
-          <div class="pmeta"><span class="cat">Web &amp; Email</span><span>Absolute Beauty by Laurie</span></div>
-          <h3>Email + SMS campaigns for a med‑spa</h3>
-          <p>Launch‑party and promo campaigns: mobile‑first HTML emails and one‑segment texts that end in "call to book".</p>
-          <div class="ptags"><span class="spill" style="--c:#E8890C">HTML email</span><span class="spill" style="--c:#0E9F6E">SMS</span><span class="spill" style="--c:#0E9F6E">Copywriting</span></div>
-          <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          <div class="ptools"><span class="ttile" style="--c:#116DFF" data-i="W" title="Wix" role="img" aria-label="Wix"><svg aria-hidden="true"><use href="#tg-wix"/></svg></span></div>
+          <div class="pmeta"><span class="cat">Websites</span><span>Absolute Beauty by Laurie</span><span class="badge-feat">Long‑term client</span></div>
+          <h3>A med‑spa website built to book</h3>
+          <p>Body contouring, skin tightening and injectables in Midland, Texas. A Wix site that walks visitors from treatments and specials to booking online.</p>
+          <div class="ptags"><span class="spill" style="--c:#2346D8">Web design</span><span class="spill" style="--c:#D9468F">Med spa</span><span class="spill" style="--c:#0E9F6E">Copywriting</span></div>
+          <div class="pactions">
+            <a class="live-link" href="https://www.absolutebeautybylaurie.com/" target="_blank" rel="noopener">Visit live site <span aria-hidden="true">↗</span></a>
+            <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          </div>
         </div>
         <template class="detail">
           <h4>The brief</h4>
-          <p>Fill appointment slots for launches and promos.</p>
+          <p>Laurie runs a med spa in Midland, Texas. Her website needed to explain her treatments clearly and turn visitors into booked appointments.</p>
+          <h4>What I do</h4>
+          <ul>
+            <li>Look after the Wix site as a long‑term client: pages, services, specials and booking links kept current.</li>
+            <li>A homepage that leads to booking: a clear offer up top, signature treatments, current specials, Laurie’s story and real client results.</li>
+            <li>Shop and gift card sections so visitors can buy products and gift cards, not just book.</li>
+          </ul>
+        </template>
+      </article>
+
+      <article class="pcard" data-cat="web">
+        <div class="media m-phone tint-rose"><div class="phone light mail-shot"><div class="scrollshot" style="background-image: url(assets/img/9d1abe053403.webp)" role="img" aria-label="Halloween-themed launch party email for Absolute Beauty by Laurie"></div></div></div>
+        <div class="pbody">
+          <div class="ptools"><span class="ttile" style="--c:#1C1C1C" data-i="O" title="Omnisend" role="img" aria-label="Omnisend"><img src="https://www.google.com/s2/favicons?domain=omnisend.com&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span></div>
+          <div class="pmeta"><span class="cat">Web &amp; Email</span><span>Absolute Beauty by Laurie</span></div>
+          <h3>Seasonal email campaigns for a med‑spa</h3>
+          <p>Holiday‑ and season‑themed emails that fill appointment slots, like a Halloween‑themed launch party with last‑day specials.</p>
+          <div class="ptags"><span class="spill" style="--c:#E8890C">Email design</span><span class="spill" style="--c:#D9468F">Seasonal campaigns</span><span class="spill" style="--c:#0E9F6E">Copywriting</span></div>
+          <div class="pactions">
+            <a class="live-link" href="https://gwj.soundestlink.com/ce/v/0/6adf71785e1532e489f99418" target="_blank" rel="noopener">View the email <span aria-hidden="true">↗</span></a>
+            <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+        <template class="detail">
+          <div class="img-gallery one email-view">
+            <figure><div class="email-scroll"><img src="assets/img/9d1abe053403.webp" alt="Full email: Venus Legacy launch party, Halloween theme" width="601" height="5893" loading="lazy" decoding="async"></div><figcaption>Venus Legacy launch party · Halloween theme · scroll to read</figcaption></figure>
+          </div>
+          <h4>The brief</h4>
+          <p>Absolute Beauty by Laurie, a med spa in Midland, Texas, runs campaigns around launches, holidays and seasonal specials. Each one needs to get people booking.</p>
           <h4>What I did</h4>
           <ul>
-            <li>Designed and coded mobile‑first HTML emails.</li>
-            <li>Wrote SMS that fit one segment with a clear call to book.</li>
-            <li>Kept buttons short and tappable on phones.</li>
+            <li>Themed each campaign around the season or event, like this Halloween‑styled Venus Legacy launch party email.</li>
+            <li>Wrote the copy in Laurie’s voice: warm, playful and personal, signed from her.</li>
+            <li>Built the layout in Omnisend: event details, specials with prices, before‑and‑after results and one clear booking button per offer.</li>
+            <li>Designed mobile‑first, so every section reads well and every button is easy to tap on a phone.</li>
           </ul>
         </template>
       </article>
