@@ -24,11 +24,15 @@
     .pmain { display: flex; flex-direction: column; gap: 22px; overflow-y: auto; padding-bottom: 64px; }
     .eyebrow { margin: 0 0 8px !important; font-size: 12px !important; font-weight: 700; letter-spacing: .12em; color: var(--accent) !important; }
     .pmain .top h1 { font-size: clamp(32px, 3.4vw, 54px); }
-    .tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; background: var(--white); border-radius: 22px; padding: 6px; }
+    .tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; background: var(--white); border-radius: 22px; padding: 6px; }
     .ftab { min-height: 44px; border: 0; border-radius: 16px; background: none; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--muted); white-space: nowrap; }
     .ftab:hover { color: var(--ink); background: var(--chip); }
     .ftab[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
     .ftab .count { font-size: 11.5px; opacity: .6; margin-left: 2px; }
+    @media (max-width: 1100px) {
+      .tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+      .ftab { flex: 1 0 auto; padding: 0 14px; }
+    }
     .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
     .pcard { background: var(--card); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: transform .15s ease, border-color .15s ease; }
     .pcard:hover { transform: translateY(-2px); border-color: #BFC6D6; }
@@ -50,6 +54,19 @@
     .phone.mail-shot .scrollshot { width: 100%; height: 100%; transition-duration: 14s; }
     .email-scroll { max-height: 560px; overflow-y: auto; border-radius: 10px; box-shadow: 0 8px 20px rgba(11,27,63,.15); background: #fff; }
     .email-scroll img { box-shadow: none !important; border-radius: 0 !important; }
+    .img-gallery.email-view.two { grid-template-columns: repeat(2, minmax(0, 340px)); justify-content: center; gap: 22px; }
+    .email-view.two .email-scroll { max-height: 520px; }
+    .m-reel.six { gap: 10px; padding: 18px 22px; }
+    .pcard.wide .m-reel.six { flex: 2.3 1 0; }
+    .pcard.wide .m-reel.six .phone { height: auto; width: calc((100% - 50px) / 6); max-width: 150px; }
+    .m-reel.six .phone:nth-child(even) { transform: translateY(12px); }
+    .m-reel.six .phone:nth-child(odd) { transform: translateY(-6px); }
+    .m-reel.six .phone.fit .pv { object-fit: contain; }
+    @media (min-width: 861px) and (max-width: 1300px) {
+      .pcard.wide:has(.m-reel.six) { flex-direction: column; }
+      .pcard.wide .m-reel.six { flex: none; height: auto; padding: 26px 22px 30px; }
+      .pcard.wide:has(.m-reel.six) .pbody { padding: 22px 26px 26px; }
+    }
     .m-flow { gap: 0; padding: 18px; background: radial-gradient(#C9D3EA 1px, transparent 1px) 0 0 / 14px 14px, #F2F5FC; }
     .node { flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 8px; text-align: center; font-size: 12px; font-weight: 700; color: #0B1B3F; box-shadow: var(--shadow); }
     .node.hot { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -231,16 +248,23 @@
     .pactions .open { margin-top: 0; }
     .live-link { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 700; font-size: 13.5px; text-decoration: none; }
     .live-link:hover { background: var(--accent); color: #fff; }
+    .pactions.duo { column-gap: 8px; row-gap: 14px; }
+    .pactions.duo .live-link { padding: 0 14px; font-size: 13px; }
+    .pactions.duo .open { flex-basis: 100%; text-align: left; }
     @media (max-width: 1280px) {
       .pmain { overflow: visible; }
     }
     @media (max-width: 860px) {
-      .tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
-      .ftab { flex: none; padding: 0 16px; }
+      .ftab { min-height: 40px; }
       .pcard.wide { flex-direction: column; }
       .pcard.wide .media { min-height: 240px; flex: none; }
       .pcard.wide .pbody { padding: 18px; }
       .m-reel .phone:nth-child(n+3) { display: none; }
+      .pcard.wide .m-reel.six { height: 250px; padding: 16px 14px; }
+      .pcard.wide .m-reel.six .phone { width: calc((100% - 20px) / 3); }
+      .pcard.wide .m-reel.six .phone:nth-child(3) { display: grid; }
+      .img-gallery.email-view.two { grid-template-columns: minmax(0, 1fr); }
+      .email-view.two .email-scroll { max-height: 62vh; }
       .ugc-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px; }
       .pcard.wide .m-acc { height: 300px; flex: none; padding: 14px; }
       .m-acc .acc-i:nth-child(n+6) { display: none; }
@@ -605,11 +629,13 @@
         </template>
       </article>
       <article class="pcard wide" data-cat="ugc">
-        <div class="media m-reel">
+        <div class="media m-reel six">
           <div class="phone"><video class="pv" src="videos/kavelen-1-preview.mp4" poster="videos/kavelen-1.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Podcast UGC preview"></video></div>
           <div class="phone"><video class="pv" src="videos/kavelen-2-preview.mp4" poster="videos/kavelen-2.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Car selfie UGC preview"></video></div>
           <div class="phone"><video class="pv" src="videos/kavelen-3-preview.mp4" poster="videos/kavelen-3.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Story text ad · version A preview"></video></div>
           <div class="phone"><video class="pv" src="videos/kavelen-4-preview.mp4" poster="videos/kavelen-4.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Story text ad · version B preview"></video></div>
+          <div class="phone fit"><video class="pv" src="videos/kavelen-5-preview.mp4" poster="videos/kavelen-5.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Long-form ad preview"></video></div>
+          <div class="phone fit"><video class="pv" src="videos/kavelen-6-preview.mp4" poster="videos/kavelen-6.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Long-form ad preview, second hook"></video></div>
         </div>
         <div class="pbody">
           <div class="ptools"><span class="ttile" style="--c:#1A1A1A" data-i="H" title="Higgsfield" role="img" aria-label="Higgsfield"><img src="https://www.google.com/s2/favicons?domain=higgsfield.ai&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span><span class="ttile" style="--c:#1A1A1A" data-i="C" title="CapCut" role="img" aria-label="CapCut"><img src="https://www.google.com/s2/favicons?domain=capcut.com&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span></div>
@@ -828,27 +854,29 @@
       </article>
 
       <article class="pcard" data-cat="web">
-        <div class="media m-phone tint-rose"><div class="phone light mail-shot"><div class="scrollshot" style="background-image: url(assets/img/9d1abe053403.webp)" role="img" aria-label="Halloween-themed launch party email for Absolute Beauty by Laurie"></div></div></div>
+        <div class="media m-phone tint-rose"><div class="phone light mail-shot"><div class="scrollshot" style="background-image: url(assets/img/9d1abe053403.webp)" role="img" aria-label="Halloween-themed launch party email for Absolute Beauty by Laurie"></div></div><div class="phone light mail-shot"><div class="scrollshot" style="background-image: url(assets/img/3ce4739fa81a.webp)" role="img" aria-label="Black Friday pricing email for Absolute Beauty by Laurie"></div></div></div>
         <div class="pbody">
           <div class="ptools"><span class="ttile" style="--c:#1C1C1C" data-i="O" title="Omnisend" role="img" aria-label="Omnisend"><img src="https://www.google.com/s2/favicons?domain=omnisend.com&amp;sz=64" alt="" width="22" height="22" loading="lazy" onerror="this.parentNode.classList.add('noimg');this.remove()"></span></div>
           <div class="pmeta"><span class="cat">Web &amp; Email</span><span>Absolute Beauty by Laurie</span></div>
           <h3>Seasonal email campaigns for a med‑spa</h3>
-          <p>Holiday‑ and season‑themed emails that fill appointment slots, like a Halloween‑themed launch party with last‑day specials.</p>
+          <p>Holiday‑ and season‑themed emails that fill appointment slots, from a Halloween launch party to an early Black Friday countdown.</p>
           <div class="ptags"><span class="spill" style="--c:#E8890C">Email design</span><span class="spill" style="--c:#D9468F">Seasonal campaigns</span><span class="spill" style="--c:#0E9F6E">Copywriting</span></div>
-          <div class="pactions">
-            <a class="live-link" href="https://gwj.soundestlink.com/ce/v/0/6adf71785e1532e489f99418" target="_blank" rel="noopener">View the email <span aria-hidden="true">↗</span></a>
+          <div class="pactions duo">
+            <a class="live-link" href="https://gwj.soundestlink.com/ce/v/0/6adf71785e1532e489f99418" target="_blank" rel="noopener" aria-label="View the Halloween email">Halloween <span aria-hidden="true">↗</span></a>
+            <a class="live-link" href="https://gwj.soundestlink.com/ce/v/0/6af341bceff5d2bc80999418" target="_blank" rel="noopener" aria-label="View the Black Friday email">Black Friday <span aria-hidden="true">↗</span></a>
             <button type="button" class="open">View project <span aria-hidden="true">→</span></button>
           </div>
         </div>
         <template class="detail">
-          <div class="img-gallery one email-view">
-            <figure><div class="email-scroll"><img src="assets/img/9d1abe053403.webp" alt="Full email: Venus Legacy launch party, Halloween theme" width="601" height="5893" loading="lazy" decoding="async"></div><figcaption>Venus Legacy launch party · Halloween theme · scroll to read</figcaption></figure>
+          <div class="img-gallery email-view two">
+            <figure><div class="email-scroll"><img src="assets/img/9d1abe053403.webp" alt="Full email: Venus Legacy launch party, Halloween theme" width="601" height="5893" loading="lazy" decoding="async"></div><figcaption>Halloween · Venus Legacy launch party · scroll to read</figcaption></figure>
+            <figure><div class="email-scroll"><img src="assets/img/3ce4739fa81a.webp" alt="Full email: Black Friday pricing, three deals with one deadline" width="601" height="5466" loading="lazy" decoding="async"></div><figcaption>Black Friday · three deals, one deadline · scroll to read</figcaption></figure>
           </div>
           <h4>The brief</h4>
           <p>Absolute Beauty by Laurie, a med spa in Midland, Texas, runs campaigns around launches, holidays and seasonal specials. Each one needs to get people booking.</p>
           <h4>What I did</h4>
           <ul>
-            <li>Themed each campaign around the season or event, like this Halloween‑styled Venus Legacy launch party email.</li>
+            <li>Themed each campaign around the season or event: a Halloween‑styled Venus Legacy launch party, then an early Black Friday countdown with three deals and one deadline.</li>
             <li>Wrote the copy in Laurie’s voice: warm, playful and personal, signed from her.</li>
             <li>Built the layout in Omnisend: event details, specials with prices, before‑and‑after results and one clear booking button per offer.</li>
             <li>Designed mobile‑first, so every section reads well and every button is easy to tap on a phone.</li>
